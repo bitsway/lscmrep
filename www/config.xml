@@ -6,10 +6,10 @@
         id        = "com.businesssolutionapps.lscmrep"
         version   = "1.0.0">
 
-    <name>M-Reporting</name>
+    <name>LSC M-Reporting</name>
 
     <description>
-        M-Reporting
+        LSC M-Reporting
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">
