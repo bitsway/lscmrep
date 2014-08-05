@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<!-- Designed and developed by Business Solution Apps team v -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>MRep-Order</title>
+		
+		
+		<link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />
+        <script src="static/jquery/1.10.2/jquery-1.10.2.min.js">   </script>
+        <script src="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js">   </script>
+		
+		
+		<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>-->
+		
+		
+		<!--<link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile.structure-1.4.0.min.css" />-->
+		
+		
+		<!--<link rel="stylesheet" href="static/bl.css" />	-->	
+		<link rel="stylesheet" href="static/uni.css" />
+		
+		<!--<link rel="stylesheet" href=localStorage.theme />-->
+		
+		<!--<link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile.structure-1.4.0.min.css" />-->
+		
+		<!--<link rel="stylesheet" href="http://view.jquerymobile.com/master/css/themes/default/jquery.mobile.css">
+		<script src="http://view.jquerymobile.com/master/external/jquery/jquery.js"></script>
+		
+		<script src="http://view.jquerymobile.com/master/js/"></script>-->
+		
+		
+        <link rel="stylesheet" href="static/my.css" />
+		
+		
+        <script src="static/my.js"> </script>
+		
+        <!--<link rel="stylesheet" href="static/jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="static/my.css" />
+        <style>/* App custom styles */</style>
+		
+        <script src="static/jquery/1.7.2/jquery.min.js">   </script>
+        <script src="static/jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.js">   </script>
+        <script src="static/my.js">  </script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>	-->	
+		
+	</head>
+	
+    <body>
+	<!--<div data-role="tabs" id="tabs">-->
+		<!--=====================Log in===============#CCE6E6===-->
+		<div data-theme="d" data-role="page" id="pageHome">
+            <div data-theme="d" data-role="header" data-position="fixed" >
+			
+			<a  data-role="button" href="#leftpanel3" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+                <a data-role="button" href="#pagelogin" class="ui-btn-right" onClick="exit()">Exit</a>
+                <h3>Home</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00;">				
+				</div>
+                
+                <div data-role="fieldcontain">
+                   <a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_ord();" data-icon="arrow-r" data-iconpos="right" >Order</a>  
+				   <a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_del();" data-icon="arrow-r" data-iconpos="right" >Delivery (classic)</a>
+                    <a data-role="button" data-transition="slide" href="#delivery" data-icon="arrow-r" data-iconpos="right" >Delivery Confirmation</a>
+					<a data-role="button" data-transition="slide" href="#deliveryReturn" data-icon="arrow-r" data-iconpos="right" >Return</a>
+				  
+				   <a data-role="button" data-transition="slide"  href="#myTarget" data-icon="arrow-r" data-iconpos="right" >Target & Achivement </a>
+				  
+				   <a data-role="button" data-transition="slide"  href="#newOutlet" data-icon="arrow-r" data-iconpos="right" >New Outlet</a>
+				   <a data-role="button" data-transition="slide"  href="#dcrPage" data-icon="arrow-r" data-iconpos="right" >DCR</a>
+				   
+				   <a data-role="button" data-transition="slide"  href="#report" data-icon="arrow-r" data-iconpos="right" >Report</a>
+				   
+                  	 <a data-role="button" data-transition="slide"  href="#feedback" data-icon="arrow-r" data-iconpos="right" >Feedback</a>
+					<a data-role="button" data-transition="slide"  href="#noticeBoard" data-icon="arrow-r" data-iconpos="right" >Notice Board</a>
+                  <!-- <a data-role="button" data-transition="slide" onClick="getSyncPage()" data-icon="arrow-r" data-iconpos="right" >Sync</a>-->
+                </div>
+				
+            </div>
+
+
+	<div data-theme="d" data-role="footer" data-position="fixed"></div>
+	
+<!--panel start-->
+
+<div data-role="panel" id="leftpanel3" data-display="overlay" data-theme="d" >
+		<br/>
+		<div align="center" style=" font-size:large; font-family:Arial, Helvetica, sans-serif; color:#036"><!--<img src="m-reporting-100.png" alt="M-Reporting" />--> M-REPORTING</div>
+		<br/><br/><br/><br/>
+		<ul data-role="listview">
+			<!--<li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_ord();" data-icon="arrow-r" data-iconpos="right" >Order</a>   </li>
+            <li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_del();" data-icon="arrow-r" data-iconpos="right" >Delivery</a>   </li>-->
+						
+			<li><a href="#pageSyncRoute">Sync Route</a></li>
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		<br/>
+		<br/><br/><br/>
+		<!--<ul data-role="listview">
+			<li><a href="#" onClick="add_theme('uni')">Theme 1</a></li>
+			<li><a href="#" onClick="add_theme('bl')">Theme 2</a></li>
+		</ul>-->
+		
+		
+		
+		<div style="height:100%;"></div>
+		<div align="center" ><img src="logo_gp.png" alt="Grameen Phone" /></div>
+	</div><!-------/panel-->
+<!--<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+
+
+  <div data-role="navbar" data-theme="a" >
+    <ul>
+      <li><a href="#pageSync"  data-ajax="false">Authorization</a></li> 
+    </ul>
+	 <ul>
+      <li><a href="#pageSyncRoute" data-ajax="false">Sync Route</a></li>     
+    </ul>
+  </div>
+</div>-->
+
+<!--panel end-->
+
+		
+</div><!---------/page-->  
+
+
+
+
+		 <!--<div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center">
+		 <a href="#leftpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
+		 m-Reporting</div>-->
+ 
+ 
+ <!--=====================delivery Page==================-->
+		<div data-theme="d" data-role="page" id="delivery">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Delivery</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+                   <form id="inv_form" name="inv_form">
+				   		<label for="inv_number">Invoice Number</label>
+				   		<input type="text" id="inv_number" name="inv_number" >
+						<input type="submit" id="btn_inv" name="btn _inv" value="Confirm">
+				   </form>
+				  
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			<!--panel-->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 </div><!--/page-->
+		 
+		 
+		  <!--=====================delivery Return Page==================-->
+		<div data-theme="d" data-role="page" id="deliveryReturn">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Return</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+                   <form id="inv_form" name="inv_form">
+				   		<label for="inv_number">Invoice Number</label>
+				   		<input type="number" id="inv_number" name="inv_number" >
+						
+						<select name="se_name" id="se_name" data-native-menu="false">
+								<option value="">Select Cause</option>
+								<option value="1">Outlet Closed</option>
+								<option value="2">Product not Req.</option>
+								<option value="3">Ask Credit</option>
+								<option value="4">No Proprietor</option>
+								<option value="4">Product Damaged</option>
+								<option value="4">Product Damaged</option>
+							</select>
+						
+						<input type="submit" id="btn_inv" name="btn _inv" value="Confirm">
+				   </form>
+				   
+				  <br/>
+				  <br/>
+				  <form>
+				  	<input type="submit" id="btn_inv" name="btn _inv" value="Partial Return">
+				   </form>
+				  
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			<!--panel-->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 </div><!--/page-->
+		 
+		 <!--=====================target Page==================-->
+		<div data-theme="d" data-role="page" id="myTarget">
+            <div data-theme="d" data-role="header" data-position="fixed">
+               <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Target</h3>
+            </div>
+			
+            <div data-role="content">
+				
+				<ul data-role="listview" >
+					<li><a href="#t_month" >Target of the month</a></li>
+					<li><a href="#t_remain" >Target Remain</a></li>
+					<li><a href="#statusToday">Status Today</a></li>
+					<!--<li><a href="#">Channel Details</a></li>
+					<li><a href="#">Target SKU</a></li>-->
+					<li><a href="#">List Of TPR</a></li>
+				</ul>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer"  data-position="fixed">
+				
+			</div><!---/footer-->
+			
+		 </div><!--/page-->
+		 
+		 
+		 <!--=====================target remain Page==================-->
+		<div data-theme="d" data-role="page" id="target_remain">
+            <div data-theme="d" data-role="header" data-position="fixed">
+             <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Target Remain</h3>
+            </div>
+			
+            <div data-role="content">
+				<form id="search_form" name="search_form">
+				   			<label for="se_name">Name</label>
+							<select name="se_name" id="se_name" data-native-menu="false">
+								<option value="1">The 1st Option</option>
+								<option value="2">The 2nd Option</option>
+								<option value="3">The 3rd Option</option>
+								<option value="4">The 4th Option</option>
+							</select>
+						
+						<input type="submit" id="btn_inv" name="btn_inv" value="Show">
+				 </form>
+				<div >
+					<table data-mode="reflow" class="ui-responsive table-stroke" style="width:100%;">
+						<tr>
+							<td>Total outlets</td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td>Visited outlets</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<td>Remain outlets</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>Total order Amount</td>
+							<td>200</td>
+						</tr>
+						<tr>
+							<td>Target Outlet</td>
+							<td>15</td>
+						</tr>
+						<tr>
+							<td>Target Remained</td>
+							<td>10</td>
+						</tr>
+						
+					</table>
+				</div>
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" role="main" data-position="fixed">
+				<a  href="#panel_target_re" >menu</a>
+			</div><!---/footer-->
+			
+			
+			<!--panel-->	
+			<div data-role="panel" id="panel_target_re" data-display="overlay" data-theme="d">
+				<ul data-role="listview">
+					<li><a href="#myTarget">Target of Month</a></li>
+					<li><a href="#target_remain">Target Remained</a></li>
+					<li><a href="#">Daily Target</a></li>
+					<li><a href="#">Achive till date</a></li>
+					<li><a href="#">Journey day Remained</a></li>
+					<li><a href="#">Target Remain</a></li>
+					<li><a href="#">Outlets Remain</a></li>
+				</ul>
+			
+			</div>
+		
+		 </div><!--/page--> 
+		 
+		 <!--=====================toDay Status Page==================-->
+		<div data-theme="d" data-role="page" id="statusToday">
+            <div data-theme="d" data-role="header" data-position="fixed">
+               <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Today Status</h3>
+            </div>
+			
+            <div data-role="content">
+				<form id="search_form" name="search_form">
+				   			<label for="se_name">Name</label>
+							<select name="se_name" id="se_name" data-native-menu="false">
+								<option value="1">The 1st Option</option>
+								<option value="2">The 2nd Option</option>
+								<option value="3">The 3rd Option</option>
+								<option value="4">The 4th Option</option>
+							</select>
+						
+						<input type="submit" id="btn_inv" name="btn_inv" value="Show">
+				 </form>
+				<div >
+					<table data-mode="reflow" class="ui-responsive table-stroke" style="width:100%;">
+						<tr>
+							<td>Total outlets</td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td>Visited outlets</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<td>Remain outlets</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>Total order Amount</td>
+							<td>200</td>
+						</tr>
+						<tr>
+							<td>Target Outlet</td>
+							<td>15</td>
+						</tr>
+						<tr>
+							<td>Target Remained</td>
+							<td>10</td>
+						</tr>
+						
+					</table>
+				</div>
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				<a  href="#panel_target_re" >menu</a>
+			</div><!---/footer-->
+			
+			
+			<!--panel-->	
+			<div data-role="panel" id="panel_target_re" data-display="overlay" data-theme="d">
+				<ul data-role="listview">
+					<li><a href="#myTarget">Target of Month</a></li>
+					<li><a href="#target_remain">Target Remained</a></li>
+					<li><a href="#">Daily Target</a></li>
+					<li><a href="#">Achive till date</a></li>
+					<li><a href="#">Journey day Remained</a></li>
+					<li><a href="#">Target Remain</a></li>
+					<li><a href="#">Outlets Remain</a></li>
+				</ul>
+			
+			</div>
+		
+		 </div><!--/page-->       
+		 
+		   <!--=====================delivery Return Page==================-->
+		<div data-theme="d" data-role="page" id="newOutlet">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>New Outlet</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+                   <form id="inv_form" name="inv_form">
+				   		<label for="">Retailer Name</label>
+				   		<input type="text" id="" name="" >
+						<label for="">Status</label>
+				   		<input type="text" id="" name="" >
+						<label for="">Owner Name</label>
+				   		<input type="text" id="" name="" >
+						<label for="">Mobile No</label>
+				   		<input type="text" id="" name="" >
+						
+						
+						<select name="" id="" data-native-menu="false">
+								<option value="">Select Category</option>
+								<option value="">Urban Wet Market Grocer</option>
+								<option value="1">Urban Neighborhood Grocer </option>
+								<option value="2">Urban HPC Tong</option>
+								<option value="3">Urban General Store</option>
+								<option value="4">Shoping Complex/ Cosmetic Store</option>
+								<option value="4">Rural Wet Market Grocer</option>
+								<option value="4">Rural Neighborhood Grocer</option>
+								<option value="4">Self Service Store</option>
+								<option value="4">Drug Store</option>
+								<option value="4">Hotel</option>
+								<option value="4">Wholesale</option>
+								<option value="4">Premium General Store</option>
+								<option value="4">Out Of Home</option>
+								<option value="4">Urban Hunter</option>
+								<option value="4">Aporajeeta</option>
+								<option value="4">Customer Durable outlet</option>
+							</select>
+						
+						<input type="submit" id="btn_inv" name="btn _inv" value="Submit">
+				   </form>
+				   
+				  				  
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			<!--panel-->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 </div><!--/page-->
+		  
+		  
+		    <!--=====================DCR Page================== not use-->
+		<!--<div data-theme="d" data-role="page" id="">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>DCR</h3>
+            </div>
+			
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                   <form id="inv_form" name="inv_form">
+						
+						<select name="" id="" data-native-menu="false">
+							<option value="">Doctor Select</option>
+							<option value="1">Doctor 1 </option>
+							<option value="2">Doctor 2</option>
+							<option value="3">Doctor 3</option>
+						</select>
+						
+				   </form>
+				   
+				  <a data-role="button" data-transition="slide"  href="#dcrNextPage" data-icon="arrow-r" data-iconpos="right" >Next</a>
+				  
+				  				  
+                </div>
+				
+            </div><!--/cont-->
+			
+			<!--<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>-->
+			<!--panel-->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 <!--</div><!--/page-->
+		 
+		    <!--=====================DCR next Page==================-->
+		<div data-theme="d" data-role="page" id="dcrPage">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>DCR</h3>
+            </div>
+			
+            <div data-role="content">
+                <div data-role="fieldcontain">
+					
+					<select name="doctor" id="doctor" data-native-menu="false">
+						<option value="">Select Doctor</option>
+						<option value="1">Dr. Reba Mojumdar </option>
+						<option value="2">Dr. Abdus sabur</option>
+						<option value="3">Dr. Dinbondhu Mondal</option>
+						<option value="3">Dr. Zahidul Hossain</option>
+						<option value="3">Dr. MB Zaman</option>
+					</select>
+					
+					<select name="dr_camp" id="dr_camp" data-native-menu="false">
+						<option value="">Select Campaign</option>
+						<option value="1">A COF,A COLD, A FENAC</option>
+						<option value="2">BABY ZINC, MSalaine</option>
+						<option value="3">Pro-vit, Mouthwash</option>
+					</select>
+		
+			
+					<select name="dr_gift" id="dr_gift" data-native-menu="false">
+						<option value="">Select Gift</option>
+						<option value="1">Pen Stand</option>
+						<option value="2">Candle</option>
+						<option value="3">Paper weight</option>
+					</select>
+								
+					
+					<ul data-role="listview" data-inset="true" data-theme="d">
+							<li class="ui-field-contain">	
+								<select name="dr_sample" id="dr_sample" data-native-menu="false">
+									<option value="">Select Sample</option>
+									<option value="1">A COF</option>
+									<option value="2">A COLD</option>
+									<option value="3">A FENAC</option>
+									<option value="1">BABY ZINC</option>
+									<option value="2">MSalaine</option>
+									<option value="3">Pro-vit</option>
+									<option value="1">Mouthwash</option>
+								</select>
+								<label for="dr_sample_qty">Qty</label>
+								<input type="number" id="dr_sample_qty" name="dr_sample_qty" min="0" >
+						
+						</li>
+					</ul>	
+					
+					<ul data-role="listview" data-inset="true">
+						<li class="ui-field-contain">
+							<fieldset data-role="controlgroup">
+								<legend>Any deviation</legend>
+								<input type="radio" name="any_deviation" id="any_deviation_y" value="YES">
+								<label for="any_deviation_y">YES</label>
+								<input type="radio" name="any_deviation" id="any_deviation_n" value="NO">
+								<label for="any_deviation_n">NO</label>
+							</fieldset>
+						</li>
+						<li class="ui-field-contain">
+							<label for="res_dev">Reason for Deviation</label>
+							<textarea cols="20" rows="3" name="res_dev" id="res_dev"></textarea>
+						</li>
+					</ul>
+					
+					
+					<ul data-role="listview" data-inset="true">
+						<li class="ui-field-contain">
+							<fieldset data-role="controlgroup">
+								<legend>Call Missed</legend>
+								<input type="radio" name="call_missed" id="call_missed_y" value="YES">
+								<label for="call_missed_y">YES</label>
+								<input type="radio" name="call_missed" id="call_missed_n" value="NO">
+								<label for="call_missed_n">NO</label>
+							</fieldset>
+						</li>
+						<li class="ui-field-contain">
+							<label for="res_call_missed">Reason for Call Missed</label>
+							<select name="res_call_missed" id="res_call_missed" data-native-menu="false">
+									<option value="1">Not Available</option>
+									<option value="2">Busy</option>
+									<option value="3">Address Changed</option>
+									<option value="1">Others</option>
+								</select>
+						</li>
+					</ul>
+					
+					<form>
+						<input type="submit"  id="dcr_data" name="dcr_data" value="Submit">
+					</form>
+				  				  <!--onClick="dcrDataSubmit()"-->
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			<!--panel -->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 </div><!--/page-->
+		 
+		 <!--=====================Notice Board Page==================-->
+		<div data-theme="d" data-role="page" id="report">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Report</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+					<div style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+                   
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			
+		
+		 </div><!--/page-->  
+		  <!--=====================feedback Page==================-->
+		<div data-theme="d" data-role="page" id="feedback">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Feedback</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+                    <form id="" name="">
+						<select name="" id="" data-native-menu="false">
+								<option value="">Select Feedback Type</option>
+								<option value="1">Market Feedback</option>
+								<option value="2">HR </option>
+								<option value="3">Others</option>
+								
+							</select>
+							<textarea rows="2"></textarea>
+						<input type="submit" id="btn_inv" name="btn _inv" value="Confirm">
+				   </form>
+				  
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			<!--panel-->	
+		<!--<div data-role="panel" id="panel_t" data-display="overlay" data-theme="d">
+			<ul data-role="listview">
+				<li><a href="#myTarget">Target of Month</a></li>
+				<li><a href="#target_remain">Target Remained</a></li>
+				<li><a href="#">Daily Target</a></li>
+				<li><a href="#">Achive till date</a></li>
+				<li><a href="#">Journey day Remained</a></li>
+				<li><a href="#">Target Remain</a></li>
+				<li><a href="#">Outlets Remain</a></li>
+			</ul>
+		
+		</div>-->
+		
+		 </div><!--/page-->  
+		 
+		 <!--=====================Notice Board Page==================-->
+		<div data-theme="d" data-role="page" id="noticeBoard">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Notice Board</h3>
+            </div>
+			
+            <div data-role="content">
+			
+				<div id="myerror" style="color:#C00"></div>
+                
+                <div data-role="fieldcontain">
+					<div style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+                   
+                </div>
+				
+            </div><!--/cont-->
+			
+			<div data-theme="d" data-role="footer" data-position="fixed">
+				
+			</div>
+			
+		
+		 </div><!--/page-->   
+        <!--===================== pageSync ==================-->
+		<div data-theme="d" data-role="page" id="pageSync">
+            <div data-theme="d" data-role="header" data-position="fixed">
+			
+				<a  data-role="button" href="#leftpanel_sync" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+						Back
+					</a>
+                <h3>Authorization</h3>
+            </div>
+			
+            <div data-role="content">
+            	<div id="mySyncError" style="color:#C00"></div>
+                
+            	
+                <!--<div data-role="fieldcontain">
+					   <a data-role="button" data-transition="slide" onClick="getClientList()" data-icon="arrow-r" data-iconpos="right" >Sync</a>  
+                 </div>-->
+                
+                
+              
+				<ul data-role="listview" data-divider-theme="d" data-inset="true">
+                    <li data-role="list-divider" role="heading">Authorization</li>
+				</ul>
+				<form>
+                <!--<label for="cid">CID</label>-->
+				<input name="cid" id="cid"  value="" type="text" placeholder="CID">	
+                
+				<!--<label for="repid">User ID</label>-->
+				<input name="repid" id="repid"  value="" type="text" placeholder="User ID">	
+				
+				<!--<label for="password">Password </label>-->
+				<input type="password" name="" id="password"  value="" placeholder="Password">	
+				
+				<input type="submit" id="basicSync" name="basicSync" value="Submit" >
+				</form>
+                <br>
+                <ul data-role="listview" data-divider-theme="d" data-inset="true">
+                    <li data-role="list-divider" role="heading">Clear Authorization</li>
+				</ul>
+                <!--<input type="submit" id="clearSync" name="clearSync" value="Clear Sync" > -->
+                <div data-role="fieldcontain">
+					   <a data-role="button" href="#pageHome" class="ui-btn-right" onClick="clearSync()" style="width:100%">Clear Authorization</a>
+              </div>
+                 
+                <br><br><br><br><br><br><br><br><br><br>
+                       
+            </div>
+			
+<!--==========footer======-->	
+<div data-theme="d" data-role="footer" data-position="fixed">
+		
+	</div>
+	
+
+
+<div data-role="panel" id="leftpanel_sync" data-display="overlay" data-theme="d" >
+		<ul data-role="listview">
+			<li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_ord();" data-icon="arrow-r" data-iconpos="right" >Order</a>   </li>
+            <li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_del();" data-icon="arrow-r" data-iconpos="right" >Delivery</a>   </li>
+			<li style="background-color:#F2F2F2"></p></li>
+			
+			<li><a href="#pageSyncRoute" onClick="set_route_combo();">Sync Route</a></li>
+			
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		
+	</div>	
+	
+
+<!--==============footer end==============-->		
+		
+           <!-- <div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" data-position="fixed">m-Reporting</div>
+		</div>-->
+
+</div>		
+
+		
+		
+		<!--========================================route page start=====================-->
+		
+		
+		<div data-theme="d" data-role="page" id="pageSyncRoute">
+            <div data-theme="d" data-role="header" data-position="fixed">
+				<a  data-role="button" href="#leftpanel_route" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+						Back
+					</a>
+                <h3>Select Route</h3>
+            </div>
+			
+            <div data-role="content">
+            	<div id="mySyncError_route" style="color:#C00"></div>
+                
+            	<ul data-role="listview" data-divider-theme="d" data-inset="true">
+                    <li data-role="list-divider" role="heading" >Select Route</li>
+				</ul>
+                
+                <div id="routeList" style="display:none">
+                
+               
+                
+                </div>
+                 <select id="routeID" width="60%" data-native-menu="false">
+                <option value="">Select Route</option>
+                </select>
+                <!--<div data-role="fieldcontain">
+					   <a data-role="button" data-transition="slide" onClick="getClientList()" data-icon="arrow-r" data-iconpos="right" >Sync</a>  
+                 </div>-->
+   <!-- =================route list start====================-->
+<!--	 <select id="filter-menu" data-native-menu="false">
+        <option value="SFO">San Francisc</option>
+        <option value="LAX">Los Angeles</option>
+        <option value="YVR">Vancouver</option>
+        <option value="YYZ">Toronto</option>
+    </select>-->
+  	<script>
+	$.mobile.document
+    // "filter-menu-menu" is the ID generated for the listview when it is created
+    // by the custom selectmenu plugin. Upon creation of the listview widget we
+    // want to prepend an input field to the list to be used for a filter.
+    .on( "listviewcreate", "#routeID-menu", function( e ) {
+        var input,
+            listbox = $( "#routeID-listbox" ),
+            form = listbox.jqmData( "filter-form" ),
+            listview = $( e.target );
+        // We store the generated form in a variable attached to the popup so we
+        // avoid creating a second form/input field when the listview is
+        // destroyed/rebuilt during a refresh.
+        if ( !form ) {
+            input = $( "<input data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            $( "#routeID-listbox" )
+                .prepend( form )
+                .jqmData( "filter-form", form );
+        }
+        // Instantiate a filterable widget on the newly created listview and
+        // indicate that the generated input is to be used for the filtering.
+        listview.filterable({ input: input });
+    })
+    // The custom select list may show up as either a popup or a dialog,
+    // depending how much vertical room there is on the screen. If it shows up
+    // as a dialog, then the form containing the filter input field must be
+    // transferred to the dialog so that the user can continue to use it for
+    // filtering list items.
+    //
+    // After the dialog is closed, the form containing the filter input is
+    // transferred back into the popup.
+    .on( "pagebeforeshow pagehide", "#routeID-dialog", function( e ) {
+        var form = $( "#routeID-listbox" ).jqmData( "filter-form" ),
+            placeInDialog = ( e.type === "pagebeforeshow" ),
+            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#routeID-listbox" );
+        form
+            .find( "input" )
+            // Turn off the "inset" option when the filter input is inside a dialog
+            // and turn it back on when it is placed back inside the popup, because
+            // it looks better that way.
+            .textinput( "option", "inset", !placeInDialog )
+            .end()
+            .prependTo( destination );
+    });
+	</script>
+	<style>
+	.ui-selectmenu.ui-popup .ui-input-search {
+    margin-left: .0em;
+    margin-right: .0em;
+}
+.ui-selectmenu.ui-dialog .ui-content {
+    padding-top: 0;
+}
+.ui-selectmenu.ui-dialog .ui-selectmenu-list {
+    margin-top: 0;
+}
+.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+    border-top-width: 1px;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.ui-selectmenu.ui-dialog .ui-header {
+    border-bottom-width: 1px;
+}
+</style>
+	<!-- =================route list end====================-->
+			<input type="submit" id="routeSync" name="routeSync" value="Select" >
+             
+                 
+                <br><br><br><br><br><br><br><br><br><br>
+                       
+            </div>
+			
+            <!--<div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" data-position="fixed">m-Reporting</div>-->
+			
+	<!--==========footer======-->	
+<div data-theme="d" data-role="footer"  data-position="fixed">
+		
+	</div>
+	
+
+
+<div data-role="panel" id="leftpanel_route" data-display="overlay" data-theme="d">
+		<ul data-role="listview">
+			<li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_ord();" data-icon="arrow-r" data-iconpos="right" >Order</a>   </li>
+            <li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_del();" data-icon="arrow-r" data-iconpos="right" >Delivery</a>   </li>
+			<li style="background-color:#F2F2F2"></p></li>
+			
+			<li><a href="#pageSyncRoute" onClick="set_route_combo();">Sync Route</a></li>
+			<li style="background-color:#F2F2F2"></p>&nbsp;</p></p>&nbsp;</p></p>&nbsp;</p></li>
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		
+	</div>	
+	
+	
+
+<!--==============footer end==============-->			
+			
+</div>
+		
+		
+		
+		
+		
+		<!--========================================route page end=====================-->
+	
+    <!-- ===============Client List ================== -->
+        <div data-theme="d" data-role="page" id="pageClient" >
+		
+            <div data-theme="d" data-role="header" data-position="fixed">
+				<a  data-role="button" href="#leftpanel_client" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Select Outlet</h3>
+            </div>
+			
+			<div data-role="content">	
+			<div id="mySyncError_client"></div>
+            		<div id="clientErrMsg" style="color:#FF0000;"></div>
+					
+                    <div id="clientList" style="display:none"> </div>		
+					<input name="submit_type" id="submit_type"  value="" type="hidden" >
+	<!--<ul data-role="listview" data-divider-theme="b" data-inset="true"><li data-role="list-divider" role="heading">Select Outlet </li></ul>-->
+    <select id="clientID" width="60%" data-native-menu="false">
+    <option value="">Select Outlet</option>
+    
+    </select>
+    
+    
+<!--    <select id="filter-menu_1" data-native-menu="false" style="display:none">
+        <option value="SFO">San Francisc</option>
+        <option value="LAX">Los Angeles</option>
+        <option value="YVR">Vancouver</option>
+        <option value="YYZ">Toronto</option>
+    </select>-->
+    
+    
+    <!--==============client select start===========-->
+	
+	<script>
+	$.mobile.document
+    .on( "listviewcreate", "#clientID-menu", function( e ) {
+        var input,
+            listbox = $( "#clientID-listbox" ),
+            form = listbox.jqmData( "filter-form" ),
+            listview = $( e.target );
+
+        if ( !form ) {
+            input = $( "<input data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            $( "#clientID-listbox" )
+                .prepend( form )
+                .jqmData( "filter-form", form );
+        }
+
+        listview.filterable({ input: input });
+    })
+
+    .on( "pagebeforeshow pagehide", "#clientID-dialog", function( e ) {
+        var form = $( "#clientID-listbox" ).jqmData( "filter-form" ),
+            placeInDialog = ( e.type === "pagebeforeshow" ),
+            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#routeID-listbox" );
+        form
+            .find( "input" )
+
+            .textinput( "option", "inset", !placeInDialog )
+            .end()
+            .prependTo( destination );
+    });
+	</script>
+	
+	<!--=============client selct end===============-->				
+					
+					
+					
+                    <input type="submit" id="clientSync" name="clientSync" value="Next >" onClick="getOrder();" >
+                    <br><br><br><br><br><br><br><br><br><br>	
+            </div>
+                        
+            <!--<div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC;" align="center" data-position="fixed" >m-Reporting</div>-->
+			
+			
+				<!--==========footer======-->	
+<div data-theme="d" data-role="footer" data-position="fixed">
+		
+	</div>
+	
+
+
+<div data-role="panel" id="leftpanel_client" data-display="overlay" data-theme="d" >
+		<ul data-role="listview">
+			<li style="background-color:#F2F2F2; height:100px;"></p></li>
+			<li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_ord();" data-icon="arrow-r" data-iconpos="right" >Order</a>   </li>
+            <li><a data-role="button" data-transition="slide" onClick="clientList();set_submit_type_del();" data-icon="arrow-r" data-iconpos="right" >Delivery</a>   </li>
+			<li style="background-color:#F2F2F2"></p></li>
+			
+			<li><a href="#pageSyncRoute">Sync Route</a></li>
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		
+	</div>
+
+<!--==============footer end==============-->
+		</div>
+    
+    
+   
+<!--  ==================== Order  ========-->
+		<div data-theme="d" data-role="page" id="pageOrder">
+				<div data-theme="d" data-role="header" data-position="fixed">
+					<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+					<a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+						Back
+					</a>
+					<h3>Order</h3>
+				</div>
+				<div data-role="content">
+					<!--<div id="ordErrMsg" style="color:#FF0000;"></div>-->
+					
+                    <div id="clientDiv"></div>
+                    
+                    <!--<div id="itemListDiv_hidden">	</div>-->
+                    
+                    <div style="width:100%" id="orderListDiv"></div>
+					
+                    <div id="itemCountDiv">	</div>
+                    <div>
+					<a data-role="button" data-transition="slide" onClick="ordNext()" data-icon="arrow-r" data-iconpos="right"  >Next</a>
+					</div>
+					
+<!-- =================item list start====================-->
+
+  	<script>
+	$.mobile.document
+    .on( "listviewcreate", "#itemID_add-menu", function( e ) {
+        var input,
+            listbox = $( "#itemID_add-listbox" ),
+            form = listbox.jqmData( "filter-form" ),
+            listview = $( e.target );
+
+        if ( !form ) {
+            input = $( "<input id='itemSearch' data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            $( "#itemID_add-listbox" )
+                .prepend( form )
+                .jqmData( "filter-form", form );
+        }
+
+        listview.filterable({ input: input });
+    })
+
+    .on( "pagebeforeshow pagehide", "#itemID_add-dialog", function( e ) {
+		
+		
+		
+		//$( e.target )=null;
+        var form = $( "#itemID_add-listbox" ).jqmData( "filter-form" ),
+            placeInDialog = ( e.type === "pagebeforeshow" ),
+            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#itemID_add-listbox" );
+        form
+            .find( "input" )
+
+            .textinput( "option", "inset", !placeInDialog )
+            .end()
+            .prependTo( destination );
+	
+		
+		
+		//set focus
+		
+		
+		var item_value=$("#itemID_add").val();
+		//$('#itemID_add').selectmenu('refresh',true);
+		
+		var myselect = $("#itemID_add");
+		myselect[0].selectedIndex =0;
+		$("#itemSearch").val('');
+		myselect.selectmenu("refresh", true);
+		
+		
+		$("#"+item_value).focus();	
+		
+
+		
+		
+		/*$("#itemSearch").val(null);
+		var s_value=$("#itemSearch").val();
+		$("#itemSearch").val(s_value.replace(' ',''));*/
+		//$("#itemID_add").val();
+		
+		
+		
+    });
+	/*.out( "pagebeforeshow pagehide", "#itemID_add-dialog", function( e ) {
+		$('#itemComboDiv').empty();
+		$('#itemComboDiv').append(localStorage.itemCombo).trigger('create');	
+	});*/
+	
+	
+
+
+	</script>
+<style>
+	
+.ui-selectmenu.ui-popup .ui-input-search {
+    margin-left: .0em;
+    margin-right: .0em;
+}
+.ui-selectmenu.ui-dialog .ui-content {
+    padding-top: 0;
+}
+.ui-selectmenu.ui-dialog .ui-selectmenu-list {
+    margin-top: 0;
+}
+.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+    border-top-width: 1px;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.ui-selectmenu.ui-dialog .ui-header {
+    border-bottom-width: 1px;
+}
+</style>
+	<!-- =================item list end====================-->					
+					
+
+					
+					
+					<!--<div data-role="fieldcontain"  >
+					   <a data-role="button" data-transition="slide" onClick="ordNext()" data-icon="arrow-r" data-iconpos="right">Next ></a>
+                    </div>  <br><br><br><br><br><br><br><br><br><br>-->
+                  
+		    	</div>
+                <input name="clientID_1" id="clientID_1" placeholder="" value="" type="hidden">
+                <input name="clientNameclientID" id="clientName" placeholder="" value="" type="hidden">
+                
+                <input name="lat" id="lat" placeholder="" value="" type="hidden">
+                <input name="long" id="long" placeholder="" value="" type="hidden">
+                
+                
+		   <!-- <div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" data-position="fixed" >m-Reporting</div>-->
+		   
+		   	<!--==========footer======-->	
+            
+<!--<div data-theme="a" data-role="footer" role="main" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" data-position="fixed">-->
+ <div id="itemComboDiv" style="float:left; margin-top:5px; display:none"></div>
+  <div data-theme="d" data-role="footer" role="main" data-position="fixed">  
+ 
+  <span id="ordErrMsg" style="color:#FF0000; float:left;"></span>
+    
+	 <!--<a data-role="button" data-transition="slide" onClick="ordNext()" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right" >Next</a>-->
+   
+    
+    <!--<select style="width:90%" id="itemID_add"  data-native-menu="false" >
+    <option  value="" ><a style="width:95%">Select Item test</a></option> 
+ 	</select>-->
+    
+         
+     </div>   
+	
+	
+
+<!--<div data-role="panel" id="leftpanel_order" data-display="overlay" data-theme="a">
+		<ul data-role="listview">
+			<li><a data-role="button" data-transition="slide" onClick="clientList()" data-icon="arrow-r" data-iconpos="right" >Order</a></li>
+			<li style="background-color:#F2F2F2"></p></li>
+			
+			<li><a href="#pageSyncRoute">Sync Route</a></li>
+			<li style="background-color:#F2F2F2"></p>&nbsp;</p></p>&nbsp;</p></p>&nbsp;</p></li>
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		
+	</div>-->
+	
+
+<!--==============footer end==============-->	
+		</div>
+
+<!--  ==================== Voucher  ========-->
+		<div data-theme="d" data-role="page" id="pageVoucher">
+				<div data-theme="d" data-role="header">
+					<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+					<a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+						Back
+					</a>
+					<h3>Voucher</h3>
+				</div>
+				<div data-role="content">
+                    
+                    <div id="voucherDiv"></div>
+                    
+					
+					   <a  data-role="button" data-transition="slide" onClick="submit_value()" data-icon="arrow-r" data-iconpos="right">Submit</a>
+                   
+                    <div id="alert_show"></div>
+                    <input type="hidden" name="voucherItem" id="voucherItem" placeholder="" value="">
+                    
+		    	</div>
+		    <!--<div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" >m-Reporting</div>-->
+			
+				<!--==========footer======-->	
+<!--<div data-theme="a" data-role="footer" role="main" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" data-position="fixed">
+		<a href="#leftpanel3" >menu</a>
+	</div>
+	
+
+
+<div data-role="panel" id="leftpanel3" data-display="overlay" data-theme="a">
+		<ul data-role="listview">
+						<li><a href="#pageSync">Authorization</a></li>
+			<li><a href="#pageSyncRoute">Sync Route</a></li>
+		</ul>
+		
+	</div>	-->
+	
+
+<!--==============footer end==============-->	
+		</div>
+
+
+<!--  ===================== End Page ==============-->  		
+		<div data-theme="d" data-role="page" id="pageEnd">
+		    <div data-theme="d" data-role="header">
+			<a  data-role="button" href="#leftpanel_voucher" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png" height="13" width="13"></a>
+		        <h3>Success</h3>
+		    </div>
+	      <div data-role="content">
+		  		<b>Submitted Successfully.</b>
+                <div id="successVno"></div>
+				<ul>
+		    		<li>You Can Create New Order</li>
+                    <li>You Can Exist The Application</li>
+		    	</ul>
+					<!--<a data-role="button" data-transition="slide" data-icon="arrow-l" data-iconpos="left"  onClick="clientList()" >New Order</a>-->
+                    <a data-role="button" data-transition="slide" href="#pageClient" data-icon="arrow-r" data-iconpos="right"  onClick="pageEndNextClient()" >New</a>	
+                    <a data-role="button" data-transition="slide" href="#pageHome" data-icon="arrow-r" data-iconpos="right"  onClick="exit()" >Exit</a>		        	
+		    </div>
+			
+		  <!--  <div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" > m-Reporting</div>-->
+		  
+		  	<!--==========footer======-->	
+<div data-theme="d" data-role="footer"  data-position="fixed">
+		
+	</div>
+	
+
+
+<div data-role="panel" id="leftpanel_voucher" data-display="overlay" data-theme="d">
+		<ul data-role="listview">
+			<li><a data-role="button" data-transition="slide" onClick="clientList()" data-icon="arrow-r" data-iconpos="right" >Order</a></li>
+			<li style="background-color:#F2F2F2"></p></li>
+			
+			<li><a href="#pageSyncRoute">Sync Route</a></li>
+			<li style="background-color:#F2F2F2"></p>&nbsp;</p></p>&nbsp;</p></p>&nbsp;</p></li>
+			<li><a href="#pageSync">Authorization</a></li>
+		</ul>
+		
+	</div>
+	
+
+<!--==============footer end==============-->	
+		</div>
+		
+<!--============================================================-->		
+<!--</div>-->
+
+
+    </body>
+</html>

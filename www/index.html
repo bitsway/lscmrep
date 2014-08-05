@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+
+<!-- Designed and developed by Business Solution Apps team v -->
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>M-Reporting</title>
+		<!--<link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />-->
+        <!--<script src="static/jquery/1.10.2/jquery-1.10.2.min.js">   </script>
+        <script src="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js">   </script>-->
+
+		<!--<link rel="stylesheet" href="static/uni.css" />
+		<link rel="stylesheet" href="static/my.css" />-->
+        
+        
+        
+        <link rel="stylesheet" href="static/my.css"  />
+		<link rel="stylesheet" href="static/themes/c.min.css" />
+		<link rel="stylesheet" href="static/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />
+        
+        <script src="static/jquery/1.10.2/jquery-1.10.2.min.js">   </script>
+        <script src="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js">   </script>
+        <script src="static/my.js"> </script>
+        
+        
+        
+        <script>     
+    	$(document).ready(function(){
+			$("#submit_type").val(localStorage.submit_type);
+			clientList();
+			
+			$("#clientID").val(localStorage.clientID);
+			$("#clientName").val(localStorage.clientName);
+			$("#zoneId").val(localStorage.zoneId);
+			
+			
+			$("#clientDiv").text(localStorage.clientName);
+			$("#clientDivreqShow").text(localStorage.clientName);
+			productList();
+			depotList();
+			transportList();
+			DareaList();
+			paymentList();
+			bankList();
+			
+			
+			$("#reqInfo").html(localStorage.orderShow);
+			$("#price").val(localStorage.getPrice);
+			$("#totalPrice").val(localStorage.totalPrice);
+		});    
+		
+	</script>	
+	</head>
+    <body>
+
+	<!--<div data-role="tabs" id="tabs">-->
+
+		<!--=====================Log in===============#CCE6E6===-->
+
+    <div data-theme="c" data-role="page" id="pageHome">
+        <div data-theme="c" data-role="header" data-position="fixed" >
+            <a  data-role="button" href="#leftpanel3" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+            <a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-icon-notext"  onClick="exit()"></a>
+            <h5>M-Reporting</h5>
+        </div>
+    <div data-role="content">
+            <div id="myerror" style="color:#C00;"></div>
+            <div data-role="fieldcontain">
+               <a data-role="button" data-transition="slide" onClick="getclientList();" data-icon="arrow-r" data-iconpos="right" >Delivery (classic)</a>
+
+               <a data-role="button" data-transition="slide"  href="#noticeBoard" data-icon="arrow-r" data-iconpos="right" >Notice Board</a>
+            </div>
+    </div>
+    <div data-theme="c" data-role="footer" data-position="fixed" style="font-family:Arial, Helvetica, sans-serif; font-size:xx-small; color:#FFF; text-align:center">M-Reporting-DEMO140203</div> 
+    <!--panel start-->
+    <div data-role="panel" id="leftpanel3" data-display="overlay" data-theme="c" >
+        <br/>
+        <div align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#036">M-REPORTING</div>
+        <br/><br/><br/><br/>
+        <ul data-role="listview">
+          
+            
+            <li><a href="#pageSync">Authorization</a></li>
+        </ul>
+        <br/><br/><br/><br/>
+
+    
+        <div style="height:100%;"></div>
+        <div align="center" ><img src="logo_gp.png" alt="Grameen Phone" /></div>
+      </div>           
+    <!--panel end-->
+    </div><!---------/page-->  
+
+
+      
+
+		 
+		 <!--=====================Notice Board Page==================-->
+
+		<div data-theme="c" data-role="page" id="noticeBoard">
+
+            <div data-theme="c" data-role="header" data-position="fixed">
+
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+
+                <h3>Notice Board</h3>
+
+            </div>
+
+			
+
+            <div data-role="content">
+
+			
+
+				<div id="myerror" style="color:#C00"></div>
+
+                
+
+                <div data-role="fieldcontain">
+
+					<div style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+
+                   
+
+                </div>
+
+				
+
+            </div><!--/cont-->
+
+			
+
+			<div data-theme="c" data-role="footer" data-position="fixed">
+
+				
+
+			</div>
+
+			
+
+		
+
+		 </div><!--/page-->   
+
+        
+        
+        <!--===================== pageSync ==================-->
+
+		<div data-theme="c" data-role="page" id="pageSync">
+        
+            <div data-theme="c" data-role="header" data-position="fixed">
+              <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>               
+              <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+                <h3>Authorization</h3>
+            </div>
+
+            <div data-role="content">
+            	<div id="mySyncError" style="color:#03C"></div>
+				<ul data-role="listview" data-divider-theme="c" data-inset="true">
+                    <li data-role="list-divider" role="heading">Authorization</li>
+				</ul>
+				<form>
+				<input name="cid" id="cid"  value="" type="text" placeholder="CID">	
+				<input name="repid" id="repid"  value="" type="text" placeholder="User ID">	
+				<input type="password" name="" id="password"  value="" placeholder="Password">	
+				<input type="submit" id="basicSync" name="basicSync" value="Submit" >
+				</form>
+                <br>
+
+                <ul data-role="listview" data-divider-theme="c" data-inset="true">
+                    <li data-role="list-divider" role="heading">Clear Authorization</li>
+				</ul>
+                <input type="submit" id="clearSync" onClick="clearSync()" name="clearSync" value="Clear Sync" > 
+                <br><br><br><br><br><br><br><br><br><br>
+            </div>
+            
+            <!--==========footer======-->	
+            <div data-theme="c" data-role="footer" data-position="fixed">
+
+		
+
+	</div>
+
+<!--==============footer end==============-->		
+
+
+
+</div>		
+
+
+    <!-- ===============Client List ================== -->
+
+        <div data-theme="c" data-role="page" id="pageClient" >
+
+		
+
+            <div data-theme="c" data-role="header" data-position="fixed">
+
+				<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+
+                <h3>Select Outlet</h3>
+
+            </div>
+
+			
+
+			<div data-role="content">	
+
+			<div id="mySyncError_client"></div>
+
+            		<div id="clientErrMsg" style="color:#990000"></div>
+
+					
+
+                    <div id="clientList" style="display:none"> </div>
+
+              <!--<ul data-role="listview" data-divider-theme="b" data-inset="true"><li data-role="list-divider" role="heading">Select Outlet </li></ul>-->
+ 
+    <select id="clientID_S" width="60%" data-native-menu="false">
+    <option value="">Select Outlet</option>
+    </select>
+    
+    <!--==============client select start===========-->
+	<script>
+	$.mobile.document
+    .on( "listviewcreate", "#clientID_S-menu", function( e ) {
+        var input,
+            listbox = $( "#clientID_S-listbox" ),
+            form = listbox.jqmData( "filter-form" ),
+            listview = $( e.target );
+        if ( !form ) {
+            input = $( "<input id='clientSearch' data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            $( "#clientID_S-listbox" )
+                .prepend( form )
+                .jqmData( "filter-form", form );
+        }
+        listview.filterable({ input: input });
+    })
+    .on( "pagebeforeshow pagehide", "#clientID_S-dialog", function( e ) {
+        var form = $( "#clientID_S-listbox" ).jqmData( "filter-form" ),
+            placeInDialog = ( e.type === "pagebeforeshow" ),
+            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#clientID_S-listbox" );
+        form
+            .find( "input" )
+            .textinput( "option", "inset", !placeInDialog )
+            .end()
+            .prependTo( destination );
+    });
+
+	</script>
+
+	<!--=============client selct end===============-->				
+            <input type="submit" id="clientSync" name="clientSync" value="Next >" onClick="getOrder();" >
+
+            <br><br><br><br><br><br><br><br><br><br>	
+                
+            <input name="clientID" id="clientID" placeholder="" value="" type="hidden">
+            <input name="clientName" id="clientName" placeholder="" value="" type="hidden">
+            <input name="zoneId" id="zoneId" placeholder="" value="" type="hidden">
+
+
+        </div>
+				<!--==========footer======-->	
+
+        <div data-theme="c" data-role="footer" data-position="fixed">
+	</div>
+	</div>
+<!--==============footer end==============-->
+	</div>
+
+    
+
+    
+
+   
+
+<!--  ==================== Requisition  ========-->
+
+    <div data-theme="c" data-role="page" id="pageOrder">
+
+            <div data-theme="c" data-role="header" data-position="fixed">
+
+                <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+                    Back
+                </a>
+
+                <h3>Requisition</h3>
+
+            </div>
+
+           
+		    <div data-role="content">
+               <div id="clientDiv"></div>
+			   
+			   
+			   
+              <!--==============product start======== -->
+               <select id="productCombo" width="60%" data-native-menu="false">
+                <option value="" >Product</option>
+                </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#productCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#productCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='productSearch' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#productCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#productCombo-dialog", function( e ) {
+                    var form = $( "#productCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#productCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============product end======== -->
+           
+		   <input name="qty" id="qty" placeholder="QTY" value="" type="number">
+		   
+		   
+				<!--==============depot start======== -->
+               <select id="depotCombo" width="60%" data-native-menu="false">
+                <option value="">Depot</option>
+              </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#depotCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#depotCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='depotSearch' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#depotCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#depotCombo-dialog", function( e ) {
+                    var form = $( "#depotCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#depotCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============product end======== -->
+			   <!--==============transport start======== -->
+               <select id="transportCombo" width="60%" data-native-menu="false">
+                <option value="">Transport</option>
+              </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#transportCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#transportCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='transportSearch' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#transportCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#transportCombo-dialog", function( e ) {
+                    var form = $( "#transportCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#transportCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============transport end======== -->
+			   
+			   
+			   <!--==============payment start======== -->
+               <select id="paymentCombo" width="60%" data-native-menu="false">
+                <option value="">Payment</option>
+              </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#paymentCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#paymentCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='paymentSearch' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#paymentCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#paymentCombo-dialog", function( e ) {
+                    var form = $( "#paymentCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#paymentCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============transport end======== -->	
+			   
+			  <!--==============depot delevery start======== -->
+               <select id="delCombo" width="60%" data-native-menu="false">
+                <option value="">Delevery</option>
+              </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#delCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#delCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='delSearchD' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#delCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#delCombo-dialog", function( e ) {
+                    var form = $( "#delCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#delCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============depotD delevery end======== -->
+
+			  </br></br>
+			  
+			   <div id="orderError" style="color:#990000"></div>
+                <a data-role="button" data-transition="slide" onClick="ordNext()" data-icon="arrow-r" data-iconpos="right">Next ></a>
+     		 </div>  <br><br><br><br><br><br><br><br><br><br>
+            <!--<input name="lat" id="lat" placeholder="" value="" type="text">
+            <input name="long" id="long" placeholder="" value="" type="text">-->
+
+        <!--==========footer======-->	
+	<div data-theme="a" data-role="footer" role="main" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" data-position="fixed">
+	<span id="ordErrMsg" style="color:#FF0000; float:left;"></span>
+	 
+	 </div>   
+<!--==============footer end==============-->	
+ </div>
+
+<!--=============================requisition show start=================================-->
+<div data-theme="c" data-role="page" id="pageOrderShow">
+
+            <div data-theme="c" data-role="header" data-position="fixed">
+
+                <a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+                <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">
+                    Back
+                </a>
+
+                <h3>Requisition</h3>
+
+            </div>
+
+           
+		    <div data-role="content">
+               <div id="clientDivreqShow"></div>
+			   
+			   
+			   
+             
+           
+		   <input name="price" id="price" placeholder="Price" value="" type="number">
+		   <input name="totalPrice" id="totalPrice" placeholder="TotalPrice" value="" type="number">
+		   
+		   
+			
+			  
+			  <input name="chq" id="chq" placeholder="CHQ" value="" type="text">
+			  <!--==============bank start======== -->
+               <select id="bankCombo" width="60%" data-native-menu="false">
+                <option value="">Bank</option>
+              </select>
+                
+                <script>
+                $.mobile.document
+                .on( "listviewcreate", "#bankCombo-menu", function( e ) {
+                    var input,
+                        listbox = $( "#bankCombo-listbox" ),
+                        form = listbox.jqmData( "filter-form" ),
+                        listview = $( e.target );
+                    if ( !form ) {
+                        input = $( "<input id='bankSearch' data-type='search'></input>" );
+                        form = $( "<form></form>" ).append( input );
+                        input.textinput();
+                        $( "#bankCombo-listbox" )
+                            .prepend( form )
+                            .jqmData( "filter-form", form );
+                    }
+                    listview.filterable({ input: input });
+                })
+                .on( "pagebeforeshow pagehide", "#bankCombo-dialog", function( e ) {
+                    var form = $( "#bankCombo-listbox" ).jqmData( "filter-form" ),
+                        placeInDialog = ( e.type === "pagebeforeshow" ),
+                        destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#bankCombo-listbox" );
+                    form
+                        .find( "input" )
+                        .textinput( "option", "inset", !placeInDialog )
+                        .end()
+                        .prependTo( destination );
+                });
+            
+                </script>
+               <!--==============bank end======== -->
+			   <input name="branch" id="branch" placeholder="Branch" value="" type="text">
+			   <input name="remark" id="remark" placeholder="remark" value="" type="text">
+			   <input name="s_date" id="s_date" placeholder="Date" value="" type="date">
+			   
+			   <div  style=" height:auto; width:100%; background-color:#F0FBF7">
+			   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td width="5px">&nbsp;</td>
+				   
+					<td>
+					</br>
+					<div id="reqInfo" style=" height:auto; width:100%; background-color:#F0FBF7">
+				   </div>
+					</br>
+					
+					</td>
+				  </tr>
+				</table>
+
+				   
+			   
+			   </div>
+
+
+
+				<div id="alert_show"> </div>
+                <a id="OrderSubmitButton" data-role="button" data-transition="slide" onClick="orderSubmit()"  data-iconpos="right">Submit</a>
+     		 </div>  <br><br><br><br><br><br><br><br><br><br>
+
+
+        <!--==========footer======-->	
+	<div data-theme="a" data-role="footer" role="main" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" data-position="fixed">
+	<span id="ordErrMsg" style="color:#FF0000; float:left;"></span>
+	
+	 </div>   
+<!--==============footer end==============-->	
+ </div>
+
+<!--==============================requisition show end===================================-->
+
+
+
+
+
+
+
+<!--  ===================== End Page ==============-->  		
+
+		<div data-theme="c" data-role="page" id="pageEnd">
+
+		    <div data-theme="c" data-role="header">
+
+			<a  data-role="button" href="#leftpanel_voucher" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+
+		        <h3>Success</h3>
+
+		    </div>
+
+	      <div data-role="content">
+
+		  		<b>Submitted Successfully.</b>
+
+                <div id="successVno"></div>
+
+				<ul>
+
+		    		<li>You Can Create New Order</li>
+
+                    <li>You Can Exit The Application</li>
+
+		    	</ul>
+
+					<!--<a data-role="button" data-transition="slide" data-icon="arrow-l" data-iconpos="left"  onClick="clientList()" >New Order</a>-->
+
+                    <a data-role="button" data-transition="slide" href="#pageClient" data-icon="arrow-r" data-iconpos="right"  onClick="pageEndNextClient()" >New</a>	
+
+                    <a data-role="button" data-transition="slide" href="#pageHome" data-icon="arrow-r" data-iconpos="right"  onClick="exit()" >Exit</a>		        	
+
+		    </div>
+
+			
+
+		  <!--  <div data-theme="a" data-role="footer" style="font-size:12px;background-color:#CCC; color:#E1E1E1;" align="center" > m-Reporting</div>-->
+
+		  
+
+		  	<!--==========footer======-->	
+
+<div data-theme="c" data-role="footer"  data-position="fixed">
+
+		
+
+	</div>
+
+
+
+<!--==============footer end==============-->	
+
+		</div>
+
+		
+
+<!--============================================================-->		
+
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+</html>
