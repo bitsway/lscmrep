@@ -544,13 +544,13 @@ function orderSubmit() {
 						//location.reload();
 					}							
 				}else{
-					alert('Authentication Error');
+					$("#alert_show").html('Authentication Error');
 					$("#OrderSubmitButton").show();	
 					}
 				
 			  },
 			  error: function(result) {
-				alert(errror_str);
+				$("#alert_show").html(errror_str);
 				$("#OrderSubmitButton").show();	
 			  }				  
 	});
@@ -642,4 +642,114 @@ function set_submit_type_del_im() {
 
 
 
-//====================Delivery IM Item add End=================
+//====================client Status report=================
+function getStatusReport() {
+		
+		$("#clientErrMsg").text("");	
+		var clientIdName= $("#clientID_S").val();
+		
+		
+		//alert(clientIdName);
+		if (clientIdName==""){
+			$("#clientErrMsg").text("Client not available");	
+		}else{	
+				var clientArray=clientIdName.split("_");
+				
+				var clientId=clientArray[0];
+				var clientName=clientArray[1];
+				var zoneId=clientArray[2];
+				
+				$("#clientID").val(clientId);
+				$("#clientName").val(clientName);
+				$("#zoneId").val(zoneId);
+				
+				localStorage.clientID_status=clientId;
+				//localStorage.clientName_status=clientName;
+				//localStorage.zoneId_status=zoneId;
+				
+				//alert (localStorage.clientID_status);
+				
+			//	baseUrll + "sync/syncClientRequisition/" + settingInf[0] + "/" + settingInf[4] + "/" + settingInf[1] + "/" + settingInf[2] + "/" + settingInf[5] + "/" + cltInfo[1] + "";
+		//	$("#path_show").html (apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID);
+			$.ajax({
+					  url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
+					  success: function(result) {
+						//alert (result);
+						if (result!='Failed'){
+						//alert ('nadira');
+						var resultArray=result.split("=======");
+						//alert (resultArray.length);
+						var showReport=''
+						for ( var i=0; i<resultArray.length-1; i++){
+							showReport=showReport +resultArray[i]+'</br>=========</br>'
+							
+						}
+						
+						$("#report").html(showReport);
+						var url = "#reportPage";    
+						$.mobile.navigate(url); 
+						}
+					  },
+					  error: function(result) {
+						$("#path_show").html('Authentication Error');
+						//$("#OrderSubmitButton").show();	
+					  }				  
+			});
+		}
+}
+
+//====================client despatchRequest report=================
+function getDespatchReport() {
+		
+		$("#clientErrMsg").text("");	
+		var clientIdName= $("#clientID_S").val();
+		
+		
+		//alert(clientIdName);
+		if (clientIdName==""){
+			$("#clientErrMsg").text("Client not available");	
+		}else{	
+				var clientArray=clientIdName.split("_");
+				
+				var clientId=clientArray[0];
+				var clientName=clientArray[1];
+				var zoneId=clientArray[2];
+				
+				$("#clientID").val(clientId);
+				$("#clientName").val(clientName);
+				$("#zoneId").val(zoneId);
+				
+				localStorage.clientID_dispatch=clientId;
+				//localStorage.clientName_status=clientName;
+				//localStorage.zoneId_status=zoneId;
+				
+				//alert (localStorage.clientID_status);
+				
+			//	baseUrll + "sync/syncClientRequisition/" + settingInf[0] + "/" + settingInf[4] + "/" + settingInf[1] + "/" + settingInf[2] + "/" + settingInf[5] + "/" + cltInfo[1] + "";
+			//$("#path_show").html (apipath+'despatchRequest?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_dispatch);
+			$.ajax({
+					  url: apipath+'despatchRequest?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_dispatch,
+					  success: function(result) {
+						//alert (result);
+						if (result!='Failed'){
+						//alert ('nadira');
+						var resultArray=result.split("=======");
+						//alert (resultArray.length);
+						var showReport=''
+						for ( var i=0; i<resultArray.length-1; i++){
+							showReport=showReport +resultArray[i]+'</br>=========</br>'
+							
+						}
+						
+						$("#report").html(showReport);
+						var url = "#reportPage";    
+						$.mobile.navigate(url); 
+						}
+					  },
+					  error: function(result) {
+						$("#path_show").html('Authentication Error');
+						//$("#OrderSubmitButton").show();	
+					  }				  
+			});
+		}
+}

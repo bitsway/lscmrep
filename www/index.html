@@ -70,7 +70,7 @@
     <div data-role="content">
             <div id="myerror" style="color:#C00;"></div>
             <div data-role="fieldcontain">
-               <a data-role="button" data-transition="slide" onClick="getclientList();" data-icon="arrow-r" data-iconpos="right" >Delivery (classic)</a>
+               <a data-role="button" data-transition="slide" onClick="getclientList();" data-icon="arrow-r" data-iconpos="right" >Client</a>
 
                <a data-role="button" data-transition="slide"  href="#noticeBoard" data-icon="arrow-r" data-iconpos="right" >Notice Board</a>
             </div>
@@ -125,7 +125,7 @@
 
                 <div data-role="fieldcontain">
 
-					<div style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+					<div id="notice" style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
 
                    
 
@@ -261,15 +261,18 @@
 	</script>
 
 	<!--=============client selct end===============-->				
-            <input type="submit" id="clientSync" name="clientSync" value="Next >" onClick="getOrder();" >
+            <input type="submit" id="clientSync" name="clientSync" value="Requisition >" onClick="getOrder();" >
 
-            <br><br><br><br><br><br><br><br><br><br>	
+            <br>
+			<input type="submit" id="clientSync" name="clientSync" value="Status Report >" onClick="getStatusReport()();" >
+			<input type="submit" id="clientSync" name="clientSync" value="Dispatch Report >" onClick="getDespatchReport();" >
+			<br><br><br><br><br><br><br><br><br>	
                 
             <input name="clientID" id="clientID" placeholder="" value="" type="hidden">
             <input name="clientName" id="clientName" placeholder="" value="" type="hidden">
             <input name="zoneId" id="zoneId" placeholder="" value="" type="hidden">
 
-
+<div id="path_show"> </div>
         </div>
 				<!--==========footer======-->	
 
@@ -681,7 +684,55 @@
 
 
 
+ <!--=====================Report Page==================-->
 
+		<div data-theme="c" data-role="page" id="reportPage">
+
+            <div data-theme="c" data-role="header" data-position="fixed">
+
+			<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+
+            <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
+
+                <h3>Report</h3>
+
+            </div>
+
+			
+
+            <div data-role="content">
+
+			
+
+				<div id="myerrorReport" style="color:#C00"></div>
+
+                
+
+                <div data-role="fieldcontain">
+
+					<div id="report" style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+
+                   
+
+                </div>
+
+				
+
+            </div><!--/cont-->
+
+			
+
+			<div data-theme="c" data-role="footer" data-position="fixed">
+
+				
+
+			</div>
+
+			
+
+		
+
+		 </div><!--/page-->   
 
 
 
