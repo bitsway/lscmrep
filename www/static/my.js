@@ -485,7 +485,7 @@ function getPrice() {
 		
 		var getPrice=localStorage.basePrice;
 		
-		if ((productId = localStorage.product) && (zoneId = localStorage.zoneId) &&	(areaId = localStorage.delivery) && (payType = localStorage.payment) &&	(depotCode = localStorage.depotId) && (transport = localStorage.transport)){
+		if ((productId == localStorage.product) && (zoneId == localStorage.zoneId) &&	(areaId == localStorage.delivery) && (payType == localStorage.payment) &&	(depotCode == localStorage.depotId) && (transport == localStorage.transport)){
 			
 			getPrice=price;
 		}
@@ -519,7 +519,7 @@ function orderSubmit() {
 		localStorage.s_date=s_date;
 		
 		
-		//alert (localStorage.synccode);
+		//alert (localStorage.cid);
 		//$("#alert_show").html (localStorage.s_date)
 		$("#OrderSubmitButton").hide();	
 		//$("#alert_show").html (apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date);

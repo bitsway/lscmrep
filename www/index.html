@@ -63,7 +63,7 @@
 
     <div data-theme="c" data-role="page" id="pageHome">
         <div data-theme="c" data-role="header" data-position="fixed" >
-            <a  data-role="button" href="#leftpanel3" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.jpg"></a>
+            <a  data-role="button" href="#leftpanel3" class="ui-btn-left ui-btn-icon-notext"><img style="height:15px; " src="unilogo13.jpg"></a>
             <a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-icon-notext"  onClick="exit()"></a>
             <h5>M-Reporting</h5>
         </div>
@@ -75,11 +75,11 @@
                <a data-role="button" data-transition="slide"  href="#noticeBoard" data-icon="arrow-r" data-iconpos="right" >Notice Board</a>
             </div>
     </div>
-    <div data-theme="c" data-role="footer" data-position="fixed" style="font-family:Arial, Helvetica, sans-serif; font-size:xx-small; color:#FFF; text-align:center">M-Reporting-DEMO140203</div> 
+    <div data-theme="c" data-role="footer" data-position="fixed" style="font-family:Arial, Helvetica, sans-serif; font-size:xx-small; color:#FFF; text-align:center">M-Reporting-140823</div> 
     <!--panel start-->
     <div data-role="panel" id="leftpanel3" data-display="overlay" data-theme="c" >
         <br/>
-        <div align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:15px; color:#090"><img src="lafarge.png"><br/> M-REPORTING</div>
+        <div align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#036"><img src="lafarge.png" alt="Grameen Phone" /></div>
         <br/><br/><br/><br/>
         <ul data-role="listview">
           
@@ -207,7 +207,7 @@
 
                 <a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>
 
-                <h3>Select Outlet</h3>
+                <h3>Select Client</h3>
 
             </div>
 
@@ -226,7 +226,7 @@
               <!--<ul data-role="listview" data-divider-theme="b" data-inset="true"><li data-role="list-divider" role="heading">Select Outlet </li></ul>-->
  
     <select id="clientID_S" width="60%" data-native-menu="false">
-    <option value="">Select Outlet</option>
+    <option value="">Select Client</option>
     </select>
     
     <!--==============client select start===========-->
@@ -261,11 +261,11 @@
 	</script>
 
 	<!--=============client selct end===============-->				
-            <input type="submit" id="clientSync" name="clientSync" value="Requisition >" onClick="getOrder();" >
+            <input type="submit" id="clientSync" name="clientSync" value="Requisition" onClick="getOrder();" >
 
             <br>
-			<input type="submit" id="clientSync" name="clientSync" value="Status Report >" onClick="getStatusReport()();" >
-			<input type="submit" id="clientSync" name="clientSync" value="Dispatch Report >" onClick="getDespatchReport();" >
+			<input type="submit" id="clientSync" name="clientSync" value="Status Report" onClick="getStatusReport()();" >
+			<input type="submit" id="clientSync" name="clientSync" value="Dispatch Report" onClick="getDespatchReport();" >
 			<br><br><br><br><br><br><br><br><br>	
                 
             <input name="clientID" id="clientID" placeholder="" value="" type="hidden">
@@ -597,7 +597,7 @@
 
 
 
-				<div id="alert_show"> </div>
+				<div id="alert_show" style="color:#AC0461"> </div>
                 <a id="OrderSubmitButton" data-role="button" data-transition="slide" onClick="orderSubmit()"  data-iconpos="right">Submit</a>
      		 </div>  <br><br><br><br><br><br><br><br><br><br>
 
@@ -710,7 +710,8 @@
 
                 <div data-role="fieldcontain">
 
-					<div id="report" style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>
+					<!--<div id="report" style="background-color:#E8F3FF; width:100%; height:200px; border-radius:10px;"></div>-->
+                    <div id="report" ></div>
 
                    
 
