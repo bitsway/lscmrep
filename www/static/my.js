@@ -322,6 +322,7 @@ function DareaList() {
 function paymentList() {	
 	$('#paymentCombo').empty();
 	localStorage.paymentListStr="Payment,Cash-CD-Cheque,Cash-Deposit,Cash-Pay-Order,Cash-Transfer,Credit-PDC,Credit-BG,Credit-LC,Credit-SC";
+	//localStorage.paymentListStr="cash,credit,";
 	var paymentArray=localStorage.paymentListStr.split(',')	
 	var ob = $("#paymentCombo");
 	var value="";
@@ -331,7 +332,12 @@ function paymentList() {
 	
 	for (var p=0; p<paymentArray.length-1; p++){
 		var paymentId=paymentArray[p]
-		ob.prepend("<option value='"+ paymentId+"'>" + paymentId + "</option>");
+		if ((paymentId=='Cash-CD-Cheque') | (paymentId=='Cash-Deposit') | (paymentId=='Cash-Pay-Order') | (paymentId=='Cash-Transfer')){
+			ob.prepend("<option value='"+ 'cash'+"'>" + paymentId + "</option>");
+		}
+		if ((paymentId=='Credit-PDC') | (paymentId=='Credit-BG') | (paymentId=='Credit-LC') | (paymentId=='Credit-SC')){
+			ob.prepend("<option value='"+ 'credit'+"'>" + paymentId + "</option>");
+		}
 		}	
 	ob.prepend("<option value=''>Payment</option>");
 }
@@ -470,8 +476,10 @@ function ordNext() {
 }
 
 function getPrice() {
+	
 	var priceArray=localStorage.priceListStr.split('<fd><rd>')	
 	//alert (priceArray.length);
+	localStorage.getPrice='';
 	for (var i=0; i<priceArray.length-1; i++){
 		var priceSingleArray = priceArray[i].split('<fd>');
 		var productId = priceSingleArray[0]; 
@@ -483,14 +491,23 @@ function getPrice() {
 		var price = priceSingleArray[6]; 
 		
 		
-		var getPrice=localStorage.basePrice;
+		//var getPrice=localStorage.basePrice;
+		//alert (localStorage.product+'  '+localStorage.zoneId+'  '+localStorage.delivery+'  '+localStorage.payment+'  '+localStorage.depotId+'  '+localStorage.transport + '</br>' +productId+'  '+zoneId+'  '+areaId+'  '+payType+'  '+depotCode+'  '+transport);
 		
 		if ((productId == localStorage.product) && (zoneId == localStorage.zoneId) &&	(areaId == localStorage.delivery) && (payType == localStorage.payment) &&	(depotCode == localStorage.depotId) && (transport == localStorage.transport)){
-			
-			getPrice=price;
+			//alert (price);
+			//getPrice=price;
+			localStorage.getPrice=price;
+			//alert (localStorage.getPrice);
 		}
-	}		
-	localStorage.getPrice=getPrice;
+		
+	}	
+	//alert (localStorage.getPrice);
+	if (localStorage.getPrice==''){
+		localStorage.getPrice=localStorage.basePrice;
+	}
+	//alert (localStorage.getPrice)
+	
 	var totalPrice=parseFloat(localStorage.qty) * parseFloat(localStorage.getPrice);
 	
 	
@@ -648,7 +665,7 @@ function getStatusReport() {
 		$("#clientErrMsg").text("");	
 		var clientIdName= $("#clientID_S").val();
 		
-		
+		$("#report").html("Data Not Available");
 		//alert(clientIdName);
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
@@ -670,7 +687,7 @@ function getStatusReport() {
 				//alert (localStorage.clientID_status);
 				
 			//	baseUrll + "sync/syncClientRequisition/" + settingInf[0] + "/" + settingInf[4] + "/" + settingInf[1] + "/" + settingInf[2] + "/" + settingInf[5] + "/" + cltInfo[1] + "";
-		//	$("#path_show").html (apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID);
+			//$("#path_show").html (apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID);
 			$.ajax({
 					  url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
 					  success: function(result) {
@@ -691,7 +708,7 @@ function getStatusReport() {
 						}
 					  },
 					  error: function(result) {
-						$("#path_show").html('Authentication Error');
+						//$("#path_show").html('Authentication Error');
 						//$("#OrderSubmitButton").show();	
 					  }				  
 			});
@@ -704,7 +721,7 @@ function getDespatchReport() {
 		$("#clientErrMsg").text("");	
 		var clientIdName= $("#clientID_S").val();
 		
-		
+		$("#report").html("Data Not Available");
 		//alert(clientIdName);
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
@@ -732,7 +749,7 @@ function getDespatchReport() {
 					  success: function(result) {
 						//alert (result);
 						if (result!='Failed'){
-						//alert ('nadira');
+						//alert (result);
 						var resultArray=result.split("=======");
 						//alert (resultArray.length);
 						var showReport=''
