@@ -51,6 +51,8 @@
 			$("#reqInfo").html(localStorage.orderShow);
 			$("#price").val(localStorage.getPrice);
 			$("#totalPrice").val(localStorage.totalPrice);
+			
+			$("#login_image").hide();
 		});    
 		
 	</script>	
@@ -167,7 +169,7 @@
                     <li data-role="list-divider" role="heading">Authorization</li>
 				</ul>
 				<form>
-				<input name="cid" id="cid"  value="" type="text" placeholder="CID">	
+				<input name="cid" id="cid"  value="LAFARGE" type="text" placeholder="CID" readonly>	
 				<input name="repid" id="repid"  value="" type="text" placeholder="User ID">	
 				<input type="password" name="" id="password"  value="" placeholder="Password">	
 				<input type="submit" id="basicSync" name="basicSync" value="Submit" >
@@ -530,7 +532,7 @@
 			   
              
            
-		   <input name="price" id="price" placeholder="Price" value="" type="number">
+		   <input name="price" id="price" placeholder="Price" value="" type="number" onKeyUp="changePrice()">
 		   <input name="totalPrice" id="totalPrice" placeholder="TotalPrice" value="" type="number">
 		   
 		   
@@ -598,6 +600,10 @@
 
 
 				<div id="alert_show" style="color:#AC0461"> </div>
+                <div id="login_image" >
+                </br>              
+                <img height="40px" width="40px" src="loading.gif"></div>
+                
                 <a id="OrderSubmitButton" data-role="button" data-transition="slide" onClick="orderSubmit()"  data-iconpos="right">Submit</a>
      		 </div>  <br><br><br><br><br><br><br><br><br><br>
 

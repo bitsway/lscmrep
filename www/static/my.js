@@ -520,6 +520,23 @@ function getPrice() {
 	
 }
 
+
+//============change price=========
+function changePrice() {
+	
+	var changePrice=$("#price").val();
+	localStorage.getPrice=changePrice;
+	var totalPrice=parseFloat(localStorage.qty) * parseFloat(localStorage.getPrice);
+	
+	
+	localStorage.totalPrice=totalPrice;
+	
+	$("#price").val(localStorage.getPrice);
+	$("#totalPrice").val(localStorage.totalPrice);
+}
+
+
+
 //========================== voucher Submit
 function orderSubmit() {
 		
@@ -528,6 +545,29 @@ function orderSubmit() {
 		var  branch=$("#branch").val();
 		var  remark=$("#remark").val();
 		var  s_date=$("#s_date").val();
+		
+		
+		if (chq.length ==0 ){
+			chq_b='-';
+			chq=chq_b;
+			
+		}
+		if (bank.length ==0 ){
+			bank_b='-';
+			bank=bank_b;
+		}
+		if (branch.length ==0 ){
+			branch_b='-';
+			branch=branch_b;
+		}
+		if (remark.length ==0 ){
+			remark_b='-';
+			remark=remark_b;
+		}
+		if (s_date.length ==0 ){
+			s_date_b='-';
+			s_date=s_date_b;
+		}
 		
 		localStorage.chq=chq;
 		localStorage.bank=bank;
@@ -539,6 +579,7 @@ function orderSubmit() {
 		//alert (localStorage.cid);
 		//$("#alert_show").html (localStorage.s_date)
 		$("#OrderSubmitButton").hide();	
+		$("#login_image").show();
 		//$("#alert_show").html (apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date);
 	$.ajax({
 			  url: apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date,
@@ -557,17 +598,25 @@ function orderSubmit() {
 						url = "#pageEnd";
 						$.mobile.navigate(url); 
 						//$(location).attr('href',url);
+						$("#login_image").hide();
 						$("#OrderSubmitButton").show();	
 						//location.reload();
-					}							
+					}	
+					else{
+					//$("#alert_show").html(resArray[0]);
+					$("#login_image").hide();
+					$("#OrderSubmitButton").show();	
+					}						
 				}else{
 					$("#alert_show").html('Authentication Error');
+					$("#login_image").hide();
 					$("#OrderSubmitButton").show();	
 					}
 				
 			  },
 			  error: function(result) {
 				$("#alert_show").html(errror_str);
+				$("#login_image").hide();
 				$("#OrderSubmitButton").show();	
 			  }				  
 	});
