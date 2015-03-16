@@ -34,7 +34,15 @@ function onSuccess(position) {
 
 
 //var apipath=location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/mrepmobile_new/lafarge/";
-var apipath="http://m.businesssolutionapps.com/mrepmobile/lafarge/";
+//var apipath="http://m.businesssolutionapps.com/mrepmobile/lafarge/";
+
+//var apipath= 'http://localhost/mrep-v002/';
+var apipath= 'http://im-gp.com/mrep-v002/sync/';
+
+var httpPass='abc123Z';
+
+
+//alert ('1234');
 var cidValue=''
 var repid='';
 var password='';
@@ -83,19 +91,37 @@ $('#basicSync').click(function() {
 			$("#mySyncError").html('Error: 10001 Configuration Data not Found. Please contact your system admin.');
 			
 		}else{
+			var syncCode=Math.floor((Math.random() * 9999) + 1);
+			//var str='sync_mobile.php?str=' + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)
+			var str=encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)
+			
+			//alert ("nadira");
 			 //alert(apipath+'syncRepJMobileSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password);
-			// $("#mySyncError").html(apipath+'syncRepSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password) ;
+			// $("#mySyncError").html(apipath + 'syncRep?str='  + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)) ;
+			 //$("#mySyncError").html( apipath+"syncRep/"+str) ;
+			 
 			 $.ajax({
-				 url: apipath+'syncRepSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password,
+				// url: apipath+'syncRepSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password,
+				// url:  apipath+str,
+				 url:  apipath+"syncRep/"+str,
 				 success: function(result) {
-						loginResult=result
+						var loginResult=result
+						//alert (loginResult)
 						if (loginResult==''){
+							
 							$("#mySyncError").html('Error: 10002 Network Time out');
+							var url = "#pageSync";      
+							$.mobile.navigate(url);
+						}
+						if (loginResult=='Failed'){
+							$("#mySyncError").html('Failed');
+							
+							var url = "#pageSync";      
+							$.mobile.navigate(url);
 						}
 						
-						
-						var loginSyncArray = loginResult.split('<Synccode>');			
-						var synccode=loginSyncArray[1]
+						//var loginSyncArray = loginResult.split('<Synccode>');			
+						var synccode=syncCode
 						
 						
 						
@@ -105,9 +131,11 @@ $('#basicSync').click(function() {
 						var loginClientArray = loginData.split('</CLIENT>');
 						var loginClient=loginClientArray[0].replace('<CLIENT>','')
 						
+						//alert (loginClientArray[1]);
+						
 						var loginBankArray = loginClientArray[1].split('</BANK>');
 						var loginBank=loginBankArray[0].replace('<BANK>','')
-						
+						//alert ("aaaaa");
 						var loginProductArray = loginBankArray[1].split('</PRODUCT>');
 						var loginProduct=loginProductArray[0].replace('<PRODUCT>','')
 						
@@ -128,13 +156,13 @@ $('#basicSync').click(function() {
 						
 						if (loginResult!=''){
 							
-							syncCode=loginSyncArray[1];
+							syncCode=syncCode;
 							//alert (syncCode);
-							routeListStr=loginResultArray[2];
-							itemListStr=loginResultArray[3];
-							dvCount=loginResultArray[4];
-							itemCombo=loginResultArray[5];
-							itemComboIM=loginResultArray[6];
+							//routeListStr=loginResultArray[2];
+//							itemListStr=loginResultArray[3];
+//							dvCount=loginResultArray[4];
+//							itemCombo=loginResultArray[5];
+//							itemComboIM=loginResultArray[6];
 							//alert (loginResult);		
 							localStorage.cid=cidValue;
 							localStorage.userid=repid;
@@ -229,7 +257,7 @@ function getclientList() {
 	var url = "#pageClient";
 	$.mobile.navigate(url);
 	//$(location).attr('href',url);
-	location.reload();
+	//location.reload();
 	
 			
 }
@@ -581,10 +609,22 @@ function orderSubmit() {
 		$("#OrderSubmitButton").hide();	
 		$("#login_image").show();
 		//$("#alert_show").html (apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date);
+	
+
+	
+	
+	
+	var str_submit= localStorage.cid + '/' + httpPass + '/' + localStorage.userid + '/' + localStorage.synccode + '/' + localStorage.product + '/' + localStorage.clientID + '/' + localStorage.zoneId + '/' +localStorage.delivery + '/' + localStorage.payment + '/' + localStorage.transport + '/' + localStorage.depotId + '/' + localStorage.getPrice + '/' + localStorage.qty + '/' +localStorage.chq + '/' + localStorage.bank + '/' + localStorage.branch + '/' + localStorage.remark + '/' + localStorage.s_date
+	//$("#alert_show").html (apipath+'/sync_order.php?str='+encodeURI(str_submit));
+	
+
+	
+	
 	$.ajax({
-			  url: apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date,
+			 // url: apipath+'getSubmitResultOrd?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode +'&productId='+localStorage.product +'&clientId='+localStorage.clientID+'&zoneId='+localStorage.zoneId+'&areaId='+localStorage.delivery+'&payType='+localStorage.payment +'&transport='+localStorage.transport +'&depotCode='+localStorage.depotId+'&price='+localStorage.getPrice + '&qty='+localStorage.qty + '&chq='+localStorage.chq + '&bank='+localStorage.bank + '&bankBranch='+localStorage.branch + '&remark='+localStorage.remark + '&deliveryDate='+localStorage.s_date,
+			  url: apipath+'/requisition/'+str_submit,
 			  success: function(result) {
-				
+				//alert (result);
 				if (result!='NO'){
 					resArray=result.split('<fd>')
 					//alert (resArray[0]);
@@ -600,7 +640,7 @@ function orderSubmit() {
 						//$(location).attr('href',url);
 						$("#login_image").hide();
 						$("#OrderSubmitButton").show();	
-						//location.reload();
+						location.reload();
 					}	
 					else{
 					//$("#alert_show").html(resArray[0]);
@@ -629,7 +669,7 @@ function pageEndNextClient() {
 			clientList();
 			url = "#pageClient";	
 			$.mobile.navigate(url);
-			location.reload();
+			//location.reload();
 			//$(location).attr('href',url);
 			
 }
