@@ -775,6 +775,7 @@ function getStatusReport() {
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
+				$("#report").html('<img height="40px" width="40px" src="loading.gif">');
 				var url = "#reportPage";    
 				$.mobile.navigate(url); 
 				
@@ -839,6 +840,8 @@ function getDespatchReport() {
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
+				$("#report").html('<img height="40px" width="40px" src="loading.gif">');
+				
 				var url = "#reportPage";    
 				$.mobile.navigate(url); 
 				
