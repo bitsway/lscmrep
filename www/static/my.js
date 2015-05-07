@@ -65,7 +65,8 @@ var delivery_str_IM="";
 	
 $(function() {	
 	
-
+$("#login_image").hide();
+$("#login_wait").hide();
 	
 $('#basicSync').click(function() {
 		$("#login_wait").show();
