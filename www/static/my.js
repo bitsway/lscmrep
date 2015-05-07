@@ -56,10 +56,8 @@ var im_number=0;
 var delivery_str_IM="";
 
 //========================================
-// $(document).ready(function(){
-// set_route_combo();
-// });
 
+var reload_flag=0;
 
 
 	
@@ -67,11 +65,185 @@ $(function() {
 	
 $("#login_image").hide();
 $("#login_wait").hide();
+
+
+
+		
+//	==================================	
+
+
 	
-$('#basicSync').click(function() {
+//$('#basicSync').click(function() {
+//		$("#login_wait").show();
+//		$("#basicSync").hide();
+//
+//		
+//		localStorage.cid="";
+//		localStorage.userid="";
+//		localStorage.password="";
+//		localStorage.synccode="";
+//		localStorage.routeList="";
+//		localStorage.itemList="";
+//		localStorage.itemDivCount="";
+//		
+//		 cidValue=$("#cid").val() ;
+//		 repid=$("#repid").val() ;
+//		 repid =$.trim(repid); 
+//		 
+//		 
+//		 password=$("#password").val() ;
+//		 
+//		 // =========Clear Sync==============
+//		 clearSync();
+//		 
+//		 
+//		 if (cidValue==""||repid==""||password==""){
+//			 $("#mySyncError").html('Authorization Failed');	
+//			 var url = "#pageSync";
+//			 $.mobile.navigate(url);
+//				//$(location).attr('href',url);
+//		 }else{			 
+//			
+//		if (apipath==''){
+//			$("#mySyncError").html('Error: 10001 Configuration Data not Found. Please contact your system admin.');
+//			
+//		}else{
+//			var syncCode=Math.floor((Math.random() * 9999) + 1);
+//			//var str='sync_mobile.php?str=' + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)
+//			var str=encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)
+//			
+//			//alert ("nadira");
+//			 //alert(apipath+'syncRepJMobileSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password);
+//			// $("#mySyncError").html(apipath + 'syncRep?str='  + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)) ;
+//			// $("#mySyncError").html( apipath+"syncRep/"+str) ;
+//			 var loginResult='';
+//			 $.ajax({
+//
+//				 url:  apipath+"syncRep/"+str,
+//				 success: function(result) {
+//					// alert (loginResult);
+//						 loginResult=result
+//
+//						if (loginResult==''){
+//							
+//							$("#mySyncError").html('Error: 10002 Network Time out');
+//							
+//							$("#login_wait").hide();
+//							$("#basicSync").show();		
+//							
+//							var url = "#pageSync";      
+//							$.mobile.navigate(url);
+//						}
+//						if (loginResult=='Failed'){
+//							$("#mySyncError").html('Failed');
+//							
+//							$("#login_wait").hide();
+//							$("#basicSync").show();		
+//							
+//							var url = "#pageSync";      
+//							$.mobile.navigate(url);
+//						}
+//						if ((loginResult!='Failed') & (loginResult!='')){
+//							var synccode=syncCode
+//							
+//							var loginResultArray = loginResult.split('</TRADEMODE>');			
+//							var loginData=loginResultArray[1]
+//							
+//							var loginClientArray = loginData.split('</CLIENT>');
+//							var loginClient=loginClientArray[0].replace('<CLIENT>','')
+//							
+//							
+//							var loginBankArray = loginClientArray[1].split('</BANK>');
+//							var loginBank=loginBankArray[0].replace('<BANK>','')
+//							//alert ("aaaaa");
+//							var loginProductArray = loginBankArray[1].split('</PRODUCT>');
+//							var loginProduct=loginProductArray[0].replace('<PRODUCT>','')
+//							
+//							var loginDepotArray = loginProductArray[1].split('</DEPOT>');
+//							var loginDepot=loginDepotArray[0].replace('<DEPOT>','')
+//							
+//							var loginTransportArray = loginDepotArray[1].split('</TRANSPORT>');
+//							var loginTransport=loginTransportArray[0].replace('<TRANSPORT>','')
+//							
+//							var loginPriceArray = loginTransportArray[1].split('</PRICECHART>');
+//							var loginPrice=loginPriceArray[0].replace('<PRICECHART>','')
+//							
+//							var loginDareaArray = loginPriceArray[1].split('</DELIVERYAREA>');
+//							var loginDarea=loginDareaArray[0].replace('<DELIVERYAREA>','')
+//						
+//						
+//						
+//						
+//								
+//									
+//									syncCode=syncCode;
+//				
+//									localStorage.cid=cidValue;
+//									localStorage.userid=repid;
+//									localStorage.password=password;
+//									localStorage.synccode=syncCode;
+//									
+//									
+//									localStorage.clientListStr=loginClient;
+//									localStorage.bankListStr=loginBank;
+//									localStorage.itemListStr=loginProduct;
+//									localStorage.depotListStr=loginDepot;
+//									localStorage.transportListStr=loginTransport;
+//									localStorage.priceListStr=loginPrice;
+//									localStorage.dAreaListStr=loginDarea;
+//		
+//									
+//									
+//									
+//									//clientList();
+//									
+//									
+//									
+//									
+//		
+//									$("#login_wait").hide();
+//									$("#basicSync").show();
+//									
+//									var url = "#pageHome";
+//									//$(location).attr('href',url);
+//									$.mobile.navigate(url);
+//									location.reload();
+//									
+//								
+//							
+//							//---------------
+//						}else{
+//							alert ('111');
+//							$("#login_wait").hide();
+//							$("#basicSync").show();
+//							
+//							var url = "#pageSync";      
+//							$.mobile.navigate(url);
+//							//$("#mySyncError").html('Authentication Error. Please contact your company system admin');			
+//						}
+//				  },
+//				  error: function(result) {
+//					 		 alert ('222');
+//							$("#login_wait").hide();
+//							$("#basicSync").show();					  
+//							var url = "#pageSync";
+//					  		$.mobile.navigate(url);
+//					//	$(location).attr('href',url);
+//				  }
+//				  
+//			});//end ajax
+//		  }//end else of blank apipath
+//		};//end else of blank field
+//		 
+//	});//end check click
+	
+}); 
+
+
+function basic_sync(){
 		$("#login_wait").show();
 		$("#basicSync").hide();
-		
+
 		
 		localStorage.cid="";
 		localStorage.userid="";
@@ -111,13 +283,13 @@ $('#basicSync').click(function() {
 			 //alert(apipath+'syncRepJMobileSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password);
 			// $("#mySyncError").html(apipath + 'syncRep?str='  + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)) ;
 			// $("#mySyncError").html( apipath+"syncRep/"+str) ;
-			 
+			 var loginResult='';
 			 $.ajax({
 
 				 url:  apipath+"syncRep/"+str,
 				 success: function(result) {
-					 //alert (loginResult);
-						var loginResult=result
+					// alert (loginResult);
+						 loginResult=result
 
 						if (loginResult==''){
 							
@@ -138,77 +310,77 @@ $('#basicSync').click(function() {
 							var url = "#pageSync";      
 							$.mobile.navigate(url);
 						}
-						
-						var synccode=syncCode
-						
-						
-						
-						var loginResultArray = loginResult.split('</TRADEMODE>');			
-						var loginData=loginResultArray[1]
-						
-						var loginClientArray = loginData.split('</CLIENT>');
-						var loginClient=loginClientArray[0].replace('<CLIENT>','')
-						
-						//alert (loginClientArray[1]);
-						
-						var loginBankArray = loginClientArray[1].split('</BANK>');
-						var loginBank=loginBankArray[0].replace('<BANK>','')
-						//alert ("aaaaa");
-						var loginProductArray = loginBankArray[1].split('</PRODUCT>');
-						var loginProduct=loginProductArray[0].replace('<PRODUCT>','')
-						
-						var loginDepotArray = loginProductArray[1].split('</DEPOT>');
-						var loginDepot=loginDepotArray[0].replace('<DEPOT>','')
-						
-						var loginTransportArray = loginDepotArray[1].split('</TRANSPORT>');
-						var loginTransport=loginTransportArray[0].replace('<TRANSPORT>','')
-						
-						var loginPriceArray = loginTransportArray[1].split('</PRICECHART>');
-						var loginPrice=loginPriceArray[0].replace('<PRICECHART>','')
-						
-						var loginDareaArray = loginPriceArray[1].split('</DELIVERYAREA>');
-						var loginDarea=loginDareaArray[0].replace('<DELIVERYAREA>','')
-						
-						
-						
-						
-						if (loginResult!=''){
+						if ((loginResult!='Failed') & (loginResult!='')){
+							var synccode=syncCode
 							
-							syncCode=syncCode;
+							var loginResultArray = loginResult.split('</TRADEMODE>');			
+							var loginData=loginResultArray[1]
+							
+							var loginClientArray = loginData.split('</CLIENT>');
+							var loginClient=loginClientArray[0].replace('<CLIENT>','')
+							
+							
+							var loginBankArray = loginClientArray[1].split('</BANK>');
+							var loginBank=loginBankArray[0].replace('<BANK>','')
+							//alert ("aaaaa");
+							var loginProductArray = loginBankArray[1].split('</PRODUCT>');
+							var loginProduct=loginProductArray[0].replace('<PRODUCT>','')
+							
+							var loginDepotArray = loginProductArray[1].split('</DEPOT>');
+							var loginDepot=loginDepotArray[0].replace('<DEPOT>','')
+							
+							var loginTransportArray = loginDepotArray[1].split('</TRANSPORT>');
+							var loginTransport=loginTransportArray[0].replace('<TRANSPORT>','')
+							
+							var loginPriceArray = loginTransportArray[1].split('</PRICECHART>');
+							var loginPrice=loginPriceArray[0].replace('<PRICECHART>','')
+							
+							var loginDareaArray = loginPriceArray[1].split('</DELIVERYAREA>');
+							var loginDarea=loginDareaArray[0].replace('<DELIVERYAREA>','')
+						
+						
+						
+						
+								
+									
+									syncCode=syncCode;
+				
+									localStorage.cid=cidValue;
+									localStorage.userid=repid;
+									localStorage.password=password;
+									localStorage.synccode=syncCode;
+									
+									
+									localStorage.clientListStr=loginClient;
+									localStorage.bankListStr=loginBank;
+									localStorage.itemListStr=loginProduct;
+									localStorage.depotListStr=loginDepot;
+									localStorage.transportListStr=loginTransport;
+									localStorage.priceListStr=loginPrice;
+									localStorage.dAreaListStr=loginDarea;
 		
-							localStorage.cid=cidValue;
-							localStorage.userid=repid;
-							localStorage.password=password;
-							localStorage.synccode=syncCode;
-							
-							
-							localStorage.clientListStr=loginClient;
-							localStorage.bankListStr=loginBank;
-							localStorage.itemListStr=loginProduct;
-							localStorage.depotListStr=loginDepot;
-							localStorage.transportListStr=loginTransport;
-							localStorage.priceListStr=loginPrice;
-							localStorage.dAreaListStr=loginDarea;
-
-							
-							
-							
-							clientList();
-							
-							
-							
-							
-
-							$("#login_wait").hide();
-							$("#basicSync").show();
-							
-							var url = "#pageClient";
-							//$(location).attr('href',url);
-							$.mobile.navigate(url);
-							location.reload();
+									
+									
+									
+									//clientList();
+									
+									
+									
+									
+		
+									$("#login_wait").hide();
+									$("#basicSync").show();
+									
+									var url = "#pageHome";
+									//$(location).attr('href',url);
+									$.mobile.navigate(url);
+									location.reload();
+									
+								
 							
 							//---------------
 						}else{
+							//alert ('111');
 							$("#login_wait").hide();
 							$("#basicSync").show();
 							
@@ -218,10 +390,11 @@ $('#basicSync').click(function() {
 						}
 				  },
 				  error: function(result) {
+					 		 //alert ('222');
 							$("#login_wait").hide();
 							$("#basicSync").show();					  
 							var url = "#pageSync";
-					  $.mobile.navigate(url);
+					  		$.mobile.navigate(url);
 					//	$(location).attr('href',url);
 				  }
 				  
@@ -229,9 +402,10 @@ $('#basicSync').click(function() {
 		  }//end else of blank apipath
 		};//end else of blank field
 		 
-	});//end check click
 	
-}); 
+	
+}
+
 
 //================== Sync page
 function getSyncPage() {
@@ -273,7 +447,7 @@ function getclientList() {
 	var url = "#pageClient";
 	$.mobile.navigate(url);
 	//$(location).attr('href',url);
-	//location.reload();
+	location.reload();
 	
 			
 }
@@ -766,16 +940,20 @@ function set_submit_type_del_im() {
 
 //====================client Status report=================
 function getStatusReport() {
-		
-		$("#clientErrMsg").text("");	
-		var clientIdName= $("#clientID_S").val();
+		$("#report").html('');
+		$("#report").html('<img height="40px" width="40px" src="loading.gif">');
+		$("#clientErrMsg").text("");
+		var clientIdName="";
+		clientIdName= $("#clientID_S").val();
 		
 		//$("#report").html("Data Not Available");
 		//alert(clientIdName);
 		if (clientIdName==""){
-			$("#clientErrMsg").text("Client not available");	
+			$("#clientErrMsg").text("Client not available");
+			var url = "#pageClient";    
+		   $.mobile.navigate(url);
 		}else{	
-				$("#report").html('<img height="40px" width="40px" src="loading.gif">');
+				
 				var url = "#reportPage";    
 				$.mobile.navigate(url); 
 				
@@ -796,7 +974,7 @@ function getStatusReport() {
 				
 				//alert (localStorage.clientID_status);
 				
-			var syncClient_req = localStorage.cid +'/abc123Z/'+localStorage.userid+'/'+localStorage.password+'/'+localStorage.synccode+'/'+localStorage.clientID;
+			var syncClient_req = localStorage.cid +'/abc123Z/'+localStorage.userid+'/'+localStorage.password+'/'+localStorage.synccode+'/'+localStorage.clientID_status;
 			//$("#path_show").html (apipath+'/syncClientRequisition/'+syncClient_req);
 			$.ajax({
 					  //url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
@@ -822,6 +1000,7 @@ function getStatusReport() {
 						}
 					  },
 					  error: function(result) {
+						  $("#report").html('Authentication Error');
 						//$("#path_show").html('Authentication Error');
 						//$("#OrderSubmitButton").show();	
 					  }				  
@@ -831,7 +1010,8 @@ function getStatusReport() {
 
 //====================client despatchRequest report=================
 function getDespatchReport() {
-		
+		$("#report").html('');
+		$("#report").html('<img height="40px" width="40px" src="loading.gif">');
 		$("#clientErrMsg").text("");	
 		var clientIdName= $("#clientID_S").val();
 		
@@ -840,7 +1020,7 @@ function getDespatchReport() {
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
-				$("#report").html('<img height="40px" width="40px" src="loading.gif">');
+				
 				
 				var url = "#reportPage";    
 				$.mobile.navigate(url); 
@@ -887,7 +1067,7 @@ function getDespatchReport() {
 						}
 					  },
 					  error: function(result) {
-						$("#path_show").html('Authentication Error');
+						$("#report").html('Authentication Error');
 						//$("#OrderSubmitButton").show();	
 					  }				  
 			});
@@ -927,7 +1107,10 @@ $(document).ready(function(){
 	$("#totalPrice").val(localStorage.totalPrice);
 	
 	
+	
+	
 }); 
+
 
 //=======================All Combo==================
 
