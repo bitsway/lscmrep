@@ -36,11 +36,11 @@ function onSuccess(position) {
 //var apipath=location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/mrepmobile_new/lafarge/";
 //var apipath="http://m.businesssolutionapps.com/mrepmobile/lafarge/";
 
-//var apipath= 'http://localhost/mrep-v002/';
+//var apipath= 'http://localhost/mrep-v002/sync/';
 var apipath= 'http://im-gp.com/mrep-v002/sync/';
 
 var httpPass='abc123Z';
-
+ 
 
 //alert ('1234');
 var cidValue=''
@@ -68,6 +68,10 @@ $(function() {
 
 	
 $('#basicSync').click(function() {
+		$("#login_wait").show();
+		$("#basicSync").hide();
+		
+		
 		localStorage.cid="";
 		localStorage.userid="";
 		localStorage.password="";
@@ -78,7 +82,14 @@ $('#basicSync').click(function() {
 		
 		 cidValue=$("#cid").val() ;
 		 repid=$("#repid").val() ;
+		 repid =$.trim(repid); 
+		 
+		 
 		 password=$("#password").val() ;
+		 
+		 // =========Clear Sync==============
+		 clearSync();
+		 
 		 
 		 if (cidValue==""||repid==""||password==""){
 			 $("#mySyncError").html('Authorization Failed');	
@@ -98,7 +109,7 @@ $('#basicSync').click(function() {
 			//alert ("nadira");
 			 //alert(apipath+'syncRepJMobileSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password);
 			// $("#mySyncError").html(apipath + 'syncRep?str='  + encodeURI(cidValue) + '/' + encodeURI(httpPass) + '/' + encodeURI(repid) + '/' + encodeURI(password) + '/' + encodeURI(syncCode)) ;
-			 //$("#mySyncError").html( apipath+"syncRep/"+str) ;
+			// $("#mySyncError").html( apipath+"syncRep/"+str) ;
 			 
 			 $.ajax({
 				// url: apipath+'syncRepSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password,
@@ -157,13 +168,7 @@ $('#basicSync').click(function() {
 						if (loginResult!=''){
 							
 							syncCode=syncCode;
-							//alert (syncCode);
-							//routeListStr=loginResultArray[2];
-//							itemListStr=loginResultArray[3];
-//							dvCount=loginResultArray[4];
-//							itemCombo=loginResultArray[5];
-//							itemComboIM=loginResultArray[6];
-							//alert (loginResult);		
+		
 							localStorage.cid=cidValue;
 							localStorage.userid=repid;
 							localStorage.password=password;
@@ -187,24 +192,28 @@ $('#basicSync').click(function() {
 							
 							
 
+							$("#login_wait").hide();
+							$("#basicSync").show();
 							
-							var url = "#pageHome";
+							var url = "#pageClient";
 							//$(location).attr('href',url);
 							$.mobile.navigate(url);
 							location.reload();
 							
 							//---------------
 						}else{
-							var url = "#pageSync";      
+							$("#login_wait").hide();
+							$("#basicSync").show();
 							
-							//$(location).attr('href',url);
+							var url = "#pageSync";      
 							$.mobile.navigate(url);
-							$("#mySyncError").html('Authentication Error. Please contact your company system admin');			
+						//	$("#mySyncError").html('Authentication Error. Please contact your company system admin');			
 						}
 				  },
 				  error: function(result) {
-					  $("#mySyncError").html(errror_str);
-					  var url = "#pageSync";
+							$("#login_wait").hide();
+							$("#basicSync").show();					  
+							var url = "#pageSync";
 					  $.mobile.navigate(url);
 					//	$(location).attr('href',url);
 				  }
@@ -264,7 +273,7 @@ function getclientList() {
 
 //================== Client List
 function clientList() {	
-	$('#depot_combo').empty();
+	$('#clientID_S').empty();
 	var clientArray=localStorage.clientListStr.split('<fd><rd>')	
 	var ob = $("#clientID_S");
 	var value="";
@@ -615,7 +624,7 @@ function orderSubmit() {
 	
 	
 	var str_submit= localStorage.cid + '/' + httpPass + '/' + localStorage.userid + '/' + localStorage.synccode + '/' + localStorage.product + '/' + localStorage.clientID + '/' + localStorage.zoneId + '/' +localStorage.delivery + '/' + localStorage.payment + '/' + localStorage.transport + '/' + localStorage.depotId + '/' + localStorage.getPrice + '/' + localStorage.qty + '/' +localStorage.chq + '/' + localStorage.bank + '/' + localStorage.branch + '/' + localStorage.remark + '/' + localStorage.s_date
-	//$("#alert_show").html (apipath+'/sync_order.php?str='+encodeURI(str_submit));
+//	$("#alert_show").html (apipath+'/requisition/'+str_submit);
 	
 
 	
@@ -775,10 +784,11 @@ function getStatusReport() {
 				
 				//alert (localStorage.clientID_status);
 				
-			//	baseUrll + "sync/syncClientRequisition/" + settingInf[0] + "/" + settingInf[4] + "/" + settingInf[1] + "/" + settingInf[2] + "/" + settingInf[5] + "/" + cltInfo[1] + "";
-			//$("#path_show").html (apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID);
+			var syncClient_req = localStorage.cid +'/abc123Z/'+localStorage.userid+'/'+localStorage.password+'/'+localStorage.synccode+'/'+localStorage.clientID;
+			$("#path_show").html (apipath+'/syncClientRequisition/'+syncClient_req);
 			$.ajax({
-					  url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
+					  //url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
+					  url:  apipath+'/syncClientRequisition/'+syncClient_req,
 					  success: function(result) {
 						//alert (result);
 						if (result!='Failed'){
@@ -811,7 +821,7 @@ function getDespatchReport() {
 		var clientIdName= $("#clientID_S").val();
 		
 		$("#report").html("Data Not Available");
-		//alert(clientIdName);
+		
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
@@ -829,12 +839,15 @@ function getDespatchReport() {
 				//localStorage.clientName_status=clientName;
 				//localStorage.zoneId_status=zoneId;
 				
-				//alert (localStorage.clientID_status);
+				//alert (localStorage.clientID_dispatch);
 				
-			//	baseUrll + "sync/syncClientRequisition/" + settingInf[0] + "/" + settingInf[4] + "/" + settingInf[1] + "/" + settingInf[2] + "/" + settingInf[5] + "/" + cltInfo[1] + "";
-			//$("#path_show").html (apipath+'despatchRequest?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_dispatch);
+				var syncClient_req = localStorage.cid +'/abc123Z/'+localStorage.userid+'/'+localStorage.password+'/'+localStorage.synccode+'/'+localStorage.clientID_dispatch;
+				
+				//alert ('dfg');
+				
+			//$("#path_show").html (apipath+'/despatchRequest/'+syncClient_req);
 			$.ajax({
-					  url: apipath+'despatchRequest?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_dispatch,
+					  url:  apipath+'despatchRequest/'+syncClient_req,
 					  success: function(result) {
 						//alert (result);
 						if (result!='Failed'){
@@ -859,3 +872,228 @@ function getDespatchReport() {
 			});
 		}
 }
+//=======================Ready Function=================
+
+$(document).ready(function(){
+	$("#submit_type").val(localStorage.submit_type);
+	clientList();
+	
+	$("#clientID").val(localStorage.clientID);
+	$("#clientName").val(localStorage.clientName);
+	$("#zoneId").val(localStorage.zoneId);
+	
+	
+	$("#clientDiv").text(localStorage.clientName);
+	$("#clientDivreqShow").text(localStorage.clientName);
+	productList();
+	depotList();
+	transportList();
+	DareaList();
+	paymentList();
+	bankList();
+	
+	
+	$("#reqInfo").html(localStorage.orderShow);
+	$("#price").val(localStorage.getPrice);
+	$("#totalPrice").val(localStorage.totalPrice);
+	
+	$("#login_image").hide();
+	$("#login_wait").hide();
+}); 
+
+//=======================All Combo==================
+
+$.mobile.document
+    .on( "listviewcreate", "#clientID_S-menu", function( e ) {
+        var input,
+            listbox = $( "#clientID_S-listbox" ),
+            form = listbox.jqmData( "filter-form" ),
+            listview = $( e.target );
+        if ( !form ) {
+            input = $( "<input id='clientSearch' data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            $( "#clientID_S-listbox" )
+                .prepend( form )
+                .jqmData( "filter-form", form );
+        }
+        listview.filterable({ input: input });
+    })
+    .on( "pagebeforeshow pagehide", "#clientID_S-dialog", function( e ) {
+        var form = $( "#clientID_S-listbox" ).jqmData( "filter-form" ),
+            placeInDialog = ( e.type === "pagebeforeshow" ),
+            destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#clientID_S-listbox" );
+        form
+            .find( "input" )
+            .textinput( "option", "inset", !placeInDialog )
+            .end()
+            .prependTo( destination );
+    });
+	
+//==================
+ $.mobile.document
+	.on( "listviewcreate", "#productCombo-menu", function( e ) {
+		var input,
+			listbox = $( "#productCombo-listbox" ),
+			form = listbox.jqmData( "filter-form" ),
+			listview = $( e.target );
+		if ( !form ) {
+			input = $( "<input id='productSearch' data-type='search'></input>" );
+			form = $( "<form></form>" ).append( input );
+			input.textinput();
+			$( "#productCombo-listbox" )
+				.prepend( form )
+				.jqmData( "filter-form", form );
+		}
+		listview.filterable({ input: input });
+	})
+	.on( "pagebeforeshow pagehide", "#productCombo-dialog", function( e ) {
+		var form = $( "#productCombo-listbox" ).jqmData( "filter-form" ),
+			placeInDialog = ( e.type === "pagebeforeshow" ),
+			destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#productCombo-listbox" );
+		form
+			.find( "input" )
+			.textinput( "option", "inset", !placeInDialog )
+			.end()
+			.prependTo( destination );
+	});
+//==================
+
+ $.mobile.document
+		.on( "listviewcreate", "#depotCombo-menu", function( e ) {
+			var input,
+				listbox = $( "#depotCombo-listbox" ),
+				form = listbox.jqmData( "filter-form" ),
+				listview = $( e.target );
+			if ( !form ) {
+				input = $( "<input id='depotSearch' data-type='search'></input>" );
+				form = $( "<form></form>" ).append( input );
+				input.textinput();
+				$( "#depotCombo-listbox" )
+					.prepend( form )
+					.jqmData( "filter-form", form );
+			}
+			listview.filterable({ input: input });
+		})
+		.on( "pagebeforeshow pagehide", "#depotCombo-dialog", function( e ) {
+			var form = $( "#depotCombo-listbox" ).jqmData( "filter-form" ),
+				placeInDialog = ( e.type === "pagebeforeshow" ),
+				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#depotCombo-listbox" );
+			form
+				.find( "input" )
+				.textinput( "option", "inset", !placeInDialog )
+				.end()
+				.prependTo( destination );
+		});
+		
+//=========================
+ $.mobile.document
+		.on( "listviewcreate", "#transportCombo-menu", function( e ) {
+			var input,
+				listbox = $( "#transportCombo-listbox" ),
+				form = listbox.jqmData( "filter-form" ),
+				listview = $( e.target );
+			if ( !form ) {
+				input = $( "<input id='transportSearch' data-type='search'></input>" );
+				form = $( "<form></form>" ).append( input );
+				input.textinput();
+				$( "#transportCombo-listbox" )
+					.prepend( form )
+					.jqmData( "filter-form", form );
+			}
+			listview.filterable({ input: input });
+		})
+		.on( "pagebeforeshow pagehide", "#transportCombo-dialog", function( e ) {
+			var form = $( "#transportCombo-listbox" ).jqmData( "filter-form" ),
+				placeInDialog = ( e.type === "pagebeforeshow" ),
+				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#transportCombo-listbox" );
+			form
+				.find( "input" )
+				.textinput( "option", "inset", !placeInDialog )
+				.end()
+				.prependTo( destination );
+		});
+		
+//==============================
+ $.mobile.document
+		.on( "listviewcreate", "#paymentCombo-menu", function( e ) {
+			var input,
+				listbox = $( "#paymentCombo-listbox" ),
+				form = listbox.jqmData( "filter-form" ),
+				listview = $( e.target );
+			if ( !form ) {
+				input = $( "<input id='paymentSearch' data-type='search'></input>" );
+				form = $( "<form></form>" ).append( input );
+				input.textinput();
+				$( "#paymentCombo-listbox" )
+					.prepend( form )
+					.jqmData( "filter-form", form );
+			}
+			listview.filterable({ input: input });
+		})
+		.on( "pagebeforeshow pagehide", "#paymentCombo-dialog", function( e ) {
+			var form = $( "#paymentCombo-listbox" ).jqmData( "filter-form" ),
+				placeInDialog = ( e.type === "pagebeforeshow" ),
+				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#paymentCombo-listbox" );
+			form
+				.find( "input" )
+				.textinput( "option", "inset", !placeInDialog )
+				.end()
+				.prependTo( destination );
+		});
+		
+//=====================
+$.mobile.document
+		.on( "listviewcreate", "#delCombo-menu", function( e ) {
+			var input,
+				listbox = $( "#delCombo-listbox" ),
+				form = listbox.jqmData( "filter-form" ),
+				listview = $( e.target );
+			if ( !form ) {
+				input = $( "<input id='delSearchD' data-type='search'></input>" );
+				form = $( "<form></form>" ).append( input );
+				input.textinput();
+				$( "#delCombo-listbox" )
+					.prepend( form )
+					.jqmData( "filter-form", form );
+			}
+			listview.filterable({ input: input });
+		})
+		.on( "pagebeforeshow pagehide", "#delCombo-dialog", function( e ) {
+			var form = $( "#delCombo-listbox" ).jqmData( "filter-form" ),
+				placeInDialog = ( e.type === "pagebeforeshow" ),
+				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#delCombo-listbox" );
+			form
+				.find( "input" )
+				.textinput( "option", "inset", !placeInDialog )
+				.end()
+				.prependTo( destination );
+		});
+		
+//===========================
+ $.mobile.document
+		.on( "listviewcreate", "#bankCombo-menu", function( e ) {
+			var input,
+				listbox = $( "#bankCombo-listbox" ),
+				form = listbox.jqmData( "filter-form" ),
+				listview = $( e.target );
+			if ( !form ) {
+				input = $( "<input id='bankSearch' data-type='search'></input>" );
+				form = $( "<form></form>" ).append( input );
+				input.textinput();
+				$( "#bankCombo-listbox" )
+					.prepend( form )
+					.jqmData( "filter-form", form );
+			}
+			listview.filterable({ input: input });
+		})
+		.on( "pagebeforeshow pagehide", "#bankCombo-dialog", function( e ) {
+			var form = $( "#bankCombo-listbox" ).jqmData( "filter-form" ),
+				placeInDialog = ( e.type === "pagebeforeshow" ),
+				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#bankCombo-listbox" );
+			form
+				.find( "input" )
+				.textinput( "option", "inset", !placeInDialog )
+				.end()
+				.prependTo( destination );
+		});
