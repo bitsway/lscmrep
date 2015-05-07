@@ -112,26 +112,32 @@ $('#basicSync').click(function() {
 			// $("#mySyncError").html( apipath+"syncRep/"+str) ;
 			 
 			 $.ajax({
-				// url: apipath+'syncRepSS?cid='+cidValue+'&repid='+repid+'&mobile=8801234567890&password='+password,
-				// url:  apipath+str,
+
 				 url:  apipath+"syncRep/"+str,
 				 success: function(result) {
+					 //alert (loginResult);
 						var loginResult=result
-						//alert (loginResult)
+
 						if (loginResult==''){
 							
 							$("#mySyncError").html('Error: 10002 Network Time out');
+							
+							$("#login_wait").hide();
+							$("#basicSync").show();		
+							
 							var url = "#pageSync";      
 							$.mobile.navigate(url);
 						}
 						if (loginResult=='Failed'){
 							$("#mySyncError").html('Failed');
 							
+							$("#login_wait").hide();
+							$("#basicSync").show();		
+							
 							var url = "#pageSync";      
 							$.mobile.navigate(url);
 						}
 						
-						//var loginSyncArray = loginResult.split('<Synccode>');			
 						var synccode=syncCode
 						
 						
@@ -207,7 +213,7 @@ $('#basicSync').click(function() {
 							
 							var url = "#pageSync";      
 							$.mobile.navigate(url);
-						//	$("#mySyncError").html('Authentication Error. Please contact your company system admin');			
+							//$("#mySyncError").html('Authentication Error. Please contact your company system admin');			
 						}
 				  },
 				  error: function(result) {
@@ -763,11 +769,15 @@ function getStatusReport() {
 		$("#clientErrMsg").text("");	
 		var clientIdName= $("#clientID_S").val();
 		
-		$("#report").html("Data Not Available");
+		//$("#report").html("Data Not Available");
 		//alert(clientIdName);
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
+				var url = "#reportPage";    
+				$.mobile.navigate(url); 
+				
+				
 				var clientArray=clientIdName.split("_");
 				
 				var clientId=clientArray[0];
@@ -785,7 +795,7 @@ function getStatusReport() {
 				//alert (localStorage.clientID_status);
 				
 			var syncClient_req = localStorage.cid +'/abc123Z/'+localStorage.userid+'/'+localStorage.password+'/'+localStorage.synccode+'/'+localStorage.clientID;
-			$("#path_show").html (apipath+'/syncClientRequisition/'+syncClient_req);
+			//$("#path_show").html (apipath+'/syncClientRequisition/'+syncClient_req);
 			$.ajax({
 					  //url: apipath+'syncClientRequisition?cid='+localStorage.cid+'&repid='+localStorage.userid+'&password='+localStorage.password+'&synccode='+localStorage.synccode+'&clientId='+localStorage.clientID_status,
 					  url:  apipath+'/syncClientRequisition/'+syncClient_req,
@@ -794,16 +804,19 @@ function getStatusReport() {
 						if (result!='Failed'){
 						//alert ('nadira');
 						var resultArray=result.split("=======");
-						//alert (resultArray.length);
-						var showReport=''
+						//alert (resultArray[i]);
+						var showReport='Status Report</br></br>'
 						for ( var i=0; i<resultArray.length-1; i++){
-							showReport=showReport +resultArray[i]+'</br>=========</br>'
-							
+								var check_cust= resultArray[i].indexOf("undefined")
+								//alert (check_cust);
+								if (check_cust == -1){
+								showReport=showReport +resultArray[i]+'</br>=========</br>'
+							}
 						}
 						
 						$("#report").html(showReport);
-						var url = "#reportPage";    
-						$.mobile.navigate(url); 
+						//var url = "#reportPage";    
+//						$.mobile.navigate(url); 
 						}
 					  },
 					  error: function(result) {
@@ -820,11 +833,15 @@ function getDespatchReport() {
 		$("#clientErrMsg").text("");	
 		var clientIdName= $("#clientID_S").val();
 		
-		$("#report").html("Data Not Available");
+		//$("#report").html("Data Not Available");
 		
 		if (clientIdName==""){
 			$("#clientErrMsg").text("Client not available");	
 		}else{	
+				var url = "#reportPage";    
+				$.mobile.navigate(url); 
+				
+				
 				var clientArray=clientIdName.split("_");
 				
 				var clientId=clientArray[0];
@@ -854,15 +871,15 @@ function getDespatchReport() {
 						//alert (result);
 						var resultArray=result.split("=======");
 						//alert (resultArray.length);
-						var showReport=''
+						var showReport='Despatch Report</br></br>'
 						for ( var i=0; i<resultArray.length-1; i++){
 							showReport=showReport +resultArray[i]+'</br>=========</br>'
 							
 						}
 						
 						$("#report").html(showReport);
-						var url = "#reportPage";    
-						$.mobile.navigate(url); 
+						//var url = "#reportPage";    
+//						$.mobile.navigate(url); 
 						}
 					  },
 					  error: function(result) {
@@ -882,9 +899,17 @@ $(document).ready(function(){
 	$("#clientName").val(localStorage.clientName);
 	$("#zoneId").val(localStorage.zoneId);
 	
+	$("#login_image").hide();
+	$("#login_wait").hide();	
 	
+	if ((localStorage.clientName != '') | (localStorage.clientName!='undefined') | (localStorage.clientName!=undefined)){
+		localStorage.clientName=''
+	}
 	$("#clientDiv").text(localStorage.clientName);
 	$("#clientDivreqShow").text(localStorage.clientName);
+	//alert ("sdfdg");
+	
+	
 	productList();
 	depotList();
 	transportList();
@@ -897,8 +922,7 @@ $(document).ready(function(){
 	$("#price").val(localStorage.getPrice);
 	$("#totalPrice").val(localStorage.totalPrice);
 	
-	$("#login_image").hide();
-	$("#login_wait").hide();
+	
 }); 
 
 //=======================All Combo==================
