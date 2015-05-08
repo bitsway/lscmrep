@@ -830,7 +830,7 @@ function orderSubmit() {
 						//$(location).attr('href',url);
 						$("#login_image").hide();
 						$("#OrderSubmitButton").show();	
-						location.reload();
+						//location.reload();
 					}	
 					else{
 					//$("#alert_show").html(resArray[0]);
@@ -857,9 +857,9 @@ function orderSubmit() {
 function pageEndNextClient() {
 			
 			clientList();
-			url = "#pageClient";	
+			url = "#pageHome";	
 			$.mobile.navigate(url);
-			//location.reload();
+			location.reload();
 			//$(location).attr('href',url);
 			
 }

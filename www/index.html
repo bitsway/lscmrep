@@ -41,7 +41,7 @@
 <div data-theme="c" data-role="page" id="pageHome">
         <div data-theme="c" data-role="header" data-position="fixed" >
             <a  data-role="button" href="#leftpanel3" class="ui-btn-left ui-btn-icon-notext"><img style="height:15px; " src="menu.png"></a>
-            <a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power ui-btn-icon-notext"  onClick="exit()"></a>
+            <a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-icon-notext"  onClick="exit()"><img style="height:15px; " src="exit.png"></a>
             <h5>M-Reporting</h5>
         </div>
     <div data-role="content">
@@ -107,7 +107,7 @@
                 <input type="submit" id="clearSync" onClick="clearSync()" name="clearSync" value="Clear Sync" > -->
                 <br><br><br><br><br><br><br><br><br><br>
                 
-                <div style="color:#CCC" align="right"> build 20150407d</div>
+                <div style="color:#CCC" align="right"> build 20150408a</div>
             </div>
             
             <!--==========footer======-->	
@@ -451,23 +451,27 @@
 
 		    </div>
 
-	      <div data-role="content">
-
-		  		<b>Submitted Successfully.</b>
+	      <div data-role="content" align="center">
+			<div  style="background-image:url(result_back.png); background-repeat:no-repea; width:300px; height:200px; color:#FFF; font-size:20px;"  align="center">
+		  		
+				</br></br>
+				<b>Submitted Successfully.</b>
 
                 <div id="successVno"></div>
 
-				<ul>
+				
+				</div>
+				<!--<ul>
 
 		    		<li>You Can Create New Order</li>
 
-                   <!-- <li>You Can Exit The Application</li>-->
+                    <li>You Can Exit The Application</li>
 
-		    	</ul>
+		    	</ul>-->
 
 					<!--<a data-role="button" data-transition="slide" data-icon="arrow-l" data-iconpos="left"  onClick="clientList()" >New Order</a>-->
 
-                    <a data-role="button" data-transition="slide" href="#pageClient" data-icon="arrow-r" data-iconpos="right"  onClick="pageEndNextClient()" >New</a>	
+                    <a data-role="button" data-transition="slide"  data-icon="arrow-r" data-iconpos="right"  onClick="pageEndNextClient()" >New</a>	
 
                    <!-- <a data-role="button" data-transition="slide" href="#pageHome" data-icon="arrow-r" data-iconpos="right"  onClick="exit()" >Exit</a>	-->	        	
 
